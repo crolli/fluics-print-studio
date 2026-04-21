@@ -6,6 +6,7 @@
   <title>FLUICS PRINT Studio</title>
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg id='Ebene_1' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 31.65 31.65'%3E%3Crect width='31.65' height='31.65' rx='4.67' fill='%23ffe000'/%3E%3Crect x='17.36' y='20.8' width='1.02' height='1.02' fill='%23363332'/%3E%3Crect x='18.38' y='21.82' width='1.02' height='1.02' fill='%23363332'/%3E%3Crect x='16.34' y='21.83' width='1.02' height='1.02' fill='%23363332'/%3E%3Crect x='18.38' y='19.78' width='1.02' height='1.02' fill='%23363332'/%3E%3Crect x='16.34' y='19.78' width='1.02' height='1.02' fill='%23363332'/%3E%3Cpath d='M15.31,15.7H12.25v3.06h3.06Zm-1,2h-1v-1h1Z' fill='%23363332'/%3E%3Cpath d='M19.4,15.7H16.34v3.06H19.4Zm-1,2h-1v-1h1Z' fill='%23363332'/%3E%3Cpath d='M15.31,19.78H12.25v3.07h3.06Zm-1,2h-1v-1h1Z' fill='%23363332'/%3E%3Cpath d='M22.78,10.19H8.87a2.26,2.26,0,0,0-2.26,2.26V17h3v8.37H22V17h3V12.45A2.26,2.26,0,0,0,22.78,10.19ZM20.52,23.84H11.13V14.71h9.39ZM22.78,13.2a.75.75,0,0,1,0-1.5.75.75,0,0,1,0,1.5ZM20.52,6.31l-9.39.12v3l9.39-.12Z' fill='%23363332'/%3E%3C/svg%3E">
   <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/@zxing/browser@0.1.1/umd/index.min.js"></script>
   <style>
     .zpl-editor { font-family: 'Courier New', monospace; font-size: 12px; }
     .scrollbar-hide { scrollbar-width: none; -ms-overflow-style: none; }
@@ -2079,9 +2080,9 @@ function syncGroupUI() {
 
 // ── Barcode / QR scanner ──────────────────────────────────────────────────────
 //
-// Uses the BarcodeDetector API (Chrome/Android/Safari 17+) to scan codes from
-// the rear camera and fill the target input. Falls back gracefully with an
-// informative message if the API is unavailable.
+// Primary: BarcodeDetector API (Chrome on Android, Safari 17+) — native, fast.
+// Fallback: @zxing/browser — pure-JS, works in any browser with camera access.
+// Both paths fill the target input on first successful scan and close the overlay.
 
 /** Returns the inline SVG camera icon used in scan buttons. */
 function scannerCameraIcon() {
@@ -2092,13 +2093,15 @@ function scannerCameraIcon() {
   </svg>`;
 }
 
-let scannerStream       = null;
-let scannerAnimFrame    = null;
-let scannerTargetId     = null;
-let scannerDetector     = null;
+let scannerStream        = null;
+let scannerAnimFrame     = null;
+let scannerTargetId      = null;
+let scannerDetector      = null;
+let scannerZXingControls = null;  // IScannerControls returned by ZXing
 
 /**
  * Open the scanner overlay and start the camera for the given input element.
+ * Uses native BarcodeDetector when available, otherwise falls back to ZXing.
  * @param {string} inputId - ID of the input to fill on successful scan.
  */
 async function openScanner(inputId) {
@@ -2108,54 +2111,78 @@ async function openScanner(inputId) {
   const video   = document.getElementById('scanner-video');
   overlay.classList.remove('hidden');
 
-  if (!('BarcodeDetector' in window)) {
-    status.textContent = 'Barcode scanning is not supported in this browser. Try Chrome on Android or Safari 17+.';
+  // Camera requires a secure context — unavailable on file:// or content:// URLs.
+  if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
+    status.textContent = `Camera not available (${location.protocol}). Open this page over HTTPS to enable scanning.`;
     return;
   }
 
-  // Show diagnostic info so we know exactly what the browser reports.
-  const proto = location.protocol;
-  const hasMD = !!(navigator.mediaDevices && navigator.mediaDevices.getUserMedia);
-  status.textContent = `Checking… (${proto} / mediaDevices:${hasMD})`;
+  status.textContent = 'Starting camera…';
 
-  // navigator.mediaDevices is undefined on file:// URLs — camera requires a
-  // secure context (https:// or localhost).
-  if (!hasMD) {
-    status.textContent = `Camera not available [${proto}]. Open this page over HTTPS or localhost to enable scanning.`;
-    return;
+  if ('BarcodeDetector' in window) {
+    await _scannerNative(video, status);
+  } else if (typeof ZXingBrowser !== 'undefined') {
+    await _scannerZXing(video, status);
+  } else {
+    status.textContent = 'Barcode scanning is not supported in this browser.';
   }
+}
 
-  status.textContent = 'Requesting camera…';
+/** Native BarcodeDetector path. */
+async function _scannerNative(video, status) {
   try {
-    // Prefer the rear camera; fall back to any video device if the constraint
-    // is rejected (some Android browsers reject environment facingMode).
     try {
       scannerStream = await navigator.mediaDevices.getUserMedia({
         video: { facingMode: { ideal: 'environment' } }
       });
-    } catch (e1) {
-      status.textContent = `Fallback (${e1.name})…`;
+    } catch (_) {
       scannerStream = await navigator.mediaDevices.getUserMedia({ video: true });
     }
     video.srcObject = scannerStream;
     await video.play();
     status.textContent = 'Point camera at a barcode or QR code…';
-
     const supported = await BarcodeDetector.getSupportedFormats();
     scannerDetector = new BarcodeDetector({ formats: supported });
     scanLoop();
   } catch (e) {
-    if (e.name === 'NotAllowedError' || e.name === 'PermissionDeniedError') {
-      status.textContent = 'Camera permission denied. In Chrome: tap the ⓘ icon in the address bar → Permissions → Camera → Allow. Then reload the page and try again.';
-    } else if (e.name === 'NotFoundError') {
-      status.textContent = 'No camera found on this device.';
-    } else {
-      status.textContent = `Camera error [${e.name}]: ${e.message}`;
-    }
+    _scannerHandleError(status, e);
   }
 }
 
-/** Continuously scan video frames for barcodes. Stops on first match. */
+/** ZXing fallback path — works in Firefox, older Chrome, Samsung Internet, etc. */
+async function _scannerZXing(video, status) {
+  try {
+    const reader = new ZXingBrowser.BrowserMultiFormatReader();
+    scannerZXingControls = await reader.decodeFromConstraints(
+      { video: { facingMode: { ideal: 'environment' } } },
+      video,
+      (result, err) => {
+        if (result) {
+          const el = document.getElementById(scannerTargetId);
+          if (el) { el.value = result.getText(); el.dispatchEvent(new Event('input')); }
+          closeScanner();
+        }
+        // ZXing fires NotFoundException on every empty frame — that's normal, ignore it.
+      }
+    );
+    status.textContent = 'Point camera at a barcode or QR code…';
+  } catch (e) {
+    _scannerHandleError(status, e);
+  }
+}
+
+/** Shared error handler for both scanner paths. */
+function _scannerHandleError(status, e) {
+  if (e.name === 'NotAllowedError' || e.name === 'PermissionDeniedError') {
+    status.textContent = 'Camera permission denied. Tap the ⓘ icon in the address bar → Permissions → Camera → Allow, then reload.';
+  } else if (e.name === 'NotFoundError') {
+    status.textContent = 'No camera found on this device.';
+  } else {
+    status.textContent = `Camera error [${e.name}]: ${e.message}`;
+  }
+}
+
+/** Continuously scan video frames for barcodes (native BarcodeDetector path). */
 function scanLoop() {
   if (!scannerStream || !scannerDetector) return;
   const video = document.getElementById('scanner-video');
@@ -2180,8 +2207,9 @@ function scanLoop() {
 
 /** Stop the camera stream and hide the scanner overlay. */
 function closeScanner() {
-  if (scannerAnimFrame) { cancelAnimationFrame(scannerAnimFrame); scannerAnimFrame = null; }
-  if (scannerStream)    { scannerStream.getTracks().forEach(t => t.stop()); scannerStream = null; }
+  if (scannerZXingControls) { scannerZXingControls.stop(); scannerZXingControls = null; }
+  if (scannerAnimFrame)     { cancelAnimationFrame(scannerAnimFrame); scannerAnimFrame = null; }
+  if (scannerStream)        { scannerStream.getTracks().forEach(t => t.stop()); scannerStream = null; }
   scannerDetector = null;
   const video = document.getElementById('scanner-video');
   if (video) video.srcObject = null;
