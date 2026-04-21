@@ -6,7 +6,7 @@
   <title>FLUICS PRINT Studio</title>
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg id='Ebene_1' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 31.65 31.65'%3E%3Crect width='31.65' height='31.65' rx='4.67' fill='%23ffe000'/%3E%3Crect x='17.36' y='20.8' width='1.02' height='1.02' fill='%23363332'/%3E%3Crect x='18.38' y='21.82' width='1.02' height='1.02' fill='%23363332'/%3E%3Crect x='16.34' y='21.83' width='1.02' height='1.02' fill='%23363332'/%3E%3Crect x='18.38' y='19.78' width='1.02' height='1.02' fill='%23363332'/%3E%3Crect x='16.34' y='19.78' width='1.02' height='1.02' fill='%23363332'/%3E%3Cpath d='M15.31,15.7H12.25v3.06h3.06Zm-1,2h-1v-1h1Z' fill='%23363332'/%3E%3Cpath d='M19.4,15.7H16.34v3.06H19.4Zm-1,2h-1v-1h1Z' fill='%23363332'/%3E%3Cpath d='M15.31,19.78H12.25v3.07h3.06Zm-1,2h-1v-1h1Z' fill='%23363332'/%3E%3Cpath d='M22.78,10.19H8.87a2.26,2.26,0,0,0-2.26,2.26V17h3v8.37H22V17h3V12.45A2.26,2.26,0,0,0,22.78,10.19ZM20.52,23.84H11.13V14.71h9.39ZM22.78,13.2a.75.75,0,0,1,0-1.5.75.75,0,0,1,0,1.5ZM20.52,6.31l-9.39.12v3l9.39-.12Z' fill='%23363332'/%3E%3C/svg%3E">
   <script src="https://cdn.tailwindcss.com"></script>
-  <script src="https://unpkg.com/@zxing/browser@0.1.1/umd/index.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@zxing/library@0.19.1/umd/index.min.js"></script>
   <style>
     .zpl-editor { font-family: 'Courier New', monospace; font-size: 12px; }
     .scrollbar-hide { scrollbar-width: none; -ms-overflow-style: none; }
@@ -2097,7 +2097,7 @@ let scannerStream        = null;
 let scannerAnimFrame     = null;
 let scannerTargetId      = null;
 let scannerDetector      = null;
-let scannerZXingControls = null;  // IScannerControls returned by ZXing
+let scannerZXingReader   = null;  // ZXing.BrowserMultiFormatReader instance
 
 /**
  * Open the scanner overlay and start the camera for the given input element.
@@ -2121,10 +2121,10 @@ async function openScanner(inputId) {
 
   if ('BarcodeDetector' in window) {
     await _scannerNative(video, status);
-  } else if (typeof ZXingBrowser !== 'undefined') {
+  } else if (typeof ZXing !== 'undefined') {
     await _scannerZXing(video, status);
   } else {
-    status.textContent = 'Barcode scanning is not supported in this browser.';
+    status.textContent = 'Barcode scanning library failed to load. Check your internet connection and reload.';
   }
 }
 
@@ -2152,19 +2152,17 @@ async function _scannerNative(video, status) {
 /** ZXing fallback path — works in Firefox, older Chrome, Samsung Internet, etc. */
 async function _scannerZXing(video, status) {
   try {
-    const reader = new ZXingBrowser.BrowserMultiFormatReader();
-    scannerZXingControls = await reader.decodeFromConstraints(
-      { video: { facingMode: { ideal: 'environment' } } },
-      video,
-      (result, err) => {
-        if (result) {
-          const el = document.getElementById(scannerTargetId);
-          if (el) { el.value = result.getText(); el.dispatchEvent(new Event('input')); }
-          closeScanner();
-        }
-        // ZXing fires NotFoundException on every empty frame — that's normal, ignore it.
+    scannerZXingReader = new ZXing.BrowserMultiFormatReader();
+    // decodeFromVideoDevice starts the camera and calls the callback on every frame.
+    // undefined = default/rear camera. ZXing manages the stream internally.
+    await scannerZXingReader.decodeFromVideoDevice(undefined, video, (result, err) => {
+      if (result) {
+        const el = document.getElementById(scannerTargetId);
+        if (el) { el.value = result.getText(); el.dispatchEvent(new Event('input')); }
+        closeScanner();
       }
-    );
+      // ZXing fires NotFoundException on every empty frame — that's normal, ignore it.
+    });
     status.textContent = 'Point camera at a barcode or QR code…';
   } catch (e) {
     _scannerHandleError(status, e);
@@ -2207,7 +2205,7 @@ function scanLoop() {
 
 /** Stop the camera stream and hide the scanner overlay. */
 function closeScanner() {
-  if (scannerZXingControls) { scannerZXingControls.stop(); scannerZXingControls = null; }
+  if (scannerZXingReader) { scannerZXingReader.reset(); scannerZXingReader = null; }
   if (scannerAnimFrame)     { cancelAnimationFrame(scannerAnimFrame); scannerAnimFrame = null; }
   if (scannerStream)        { scannerStream.getTracks().forEach(t => t.stop()); scannerStream = null; }
   scannerDetector = null;
