@@ -1,0 +1,2210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FLUICS PRINT Studio</title>
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg id='Ebene_1' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 31.65 31.65'%3E%3Crect width='31.65' height='31.65' rx='4.67' fill='%23ffe000'/%3E%3Crect x='17.36' y='20.8' width='1.02' height='1.02' fill='%23363332'/%3E%3Crect x='18.38' y='21.82' width='1.02' height='1.02' fill='%23363332'/%3E%3Crect x='16.34' y='21.83' width='1.02' height='1.02' fill='%23363332'/%3E%3Crect x='18.38' y='19.78' width='1.02' height='1.02' fill='%23363332'/%3E%3Crect x='16.34' y='19.78' width='1.02' height='1.02' fill='%23363332'/%3E%3Cpath d='M15.31,15.7H12.25v3.06h3.06Zm-1,2h-1v-1h1Z' fill='%23363332'/%3E%3Cpath d='M19.4,15.7H16.34v3.06H19.4Zm-1,2h-1v-1h1Z' fill='%23363332'/%3E%3Cpath d='M15.31,19.78H12.25v3.07h3.06Zm-1,2h-1v-1h1Z' fill='%23363332'/%3E%3Cpath d='M22.78,10.19H8.87a2.26,2.26,0,0,0-2.26,2.26V17h3v8.37H22V17h3V12.45A2.26,2.26,0,0,0,22.78,10.19ZM20.52,23.84H11.13V14.71h9.39ZM22.78,13.2a.75.75,0,0,1,0-1.5.75.75,0,0,1,0,1.5ZM20.52,6.31l-9.39.12v3l9.39-.12Z' fill='%23363332'/%3E%3C/svg%3E">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    .zpl-editor { font-family: 'Courier New', monospace; font-size: 12px; }
+    .scrollbar-hide { scrollbar-width: none; -ms-overflow-style: none; }
+    .scrollbar-hide::-webkit-scrollbar { display: none; }
+  </style>
+</head>
+<body class="bg-gray-50 min-h-screen text-gray-800">
+
+  <!-- Header -->
+  <header class="bg-white border-b border-gray-200 px-4 sm:px-6 py-3 sm:py-4 flex items-center justify-between">
+    <div class="flex items-center gap-2 sm:gap-3 min-w-0">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 150.44 31.65" class="h-5 sm:h-6 w-auto shrink-0"><rect x="118.79" width="31.65" height="31.65" rx="4.67" fill="#ffe000"/><rect x="134.05" y="10.73" width="1.13" height="1.13" fill="#363332"/><path d="M138.58,3.94v7.93h7.92V3.94Zm6.79,6.79h-5.66V5.07h5.66Z" fill="#363332"/><path d="M122.73,27.71h7.92V19.79h-7.92Zm1.13-6.79h5.66v5.66h-5.66Z" fill="#363332"/><rect x="124.99" y="22.05" width="3.4" height="3.4" fill="#363332"/><polygon points="132.92 10.73 134.05 10.73 134.05 9.6 135.18 9.6 135.18 8.47 134.05 8.47 132.92 8.47 132.92 7.34 132.92 6.21 131.78 6.21 131.78 7.34 131.78 8.47 131.78 9.6 131.78 10.73 131.78 11.87 131.78 13 132.92 13 132.92 11.87 132.92 10.73" fill="#363332"/><path d="M144.23,14.13V13h-5.65v2.26H142v3.39h-1.13v1.14H142v1.13h1.13V19.79h1.13v1.13h1.14V19.79h1.13V18.65h-1.13V17.52h1.13V16.39h-1.13V15.26h1.13V14.13h-2.27Zm0,4.52H143.1V17.52h1.13Zm0-2.26H143.1V15.26h1.13Z" fill="#363332"/><rect x="129.52" y="15.26" width="1.13" height="1.13" fill="#363332"/><rect x="138.58" y="17.52" width="1.13" height="1.13" fill="#363332"/><polygon points="132.92 18.66 132.92 17.52 132.92 16.39 131.78 16.39 130.65 16.39 130.65 17.52 131.78 17.52 131.78 18.66 131.78 19.79 132.92 19.79 132.92 20.92 134.05 20.92 134.05 19.79 135.18 19.79 135.18 18.66 134.05 18.66 132.92 18.66" fill="#363332"/><polygon points="135.18 22.05 136.31 22.05 136.31 20.92 137.44 20.92 137.44 22.05 136.31 22.05 136.31 23.18 137.44 23.18 138.57 23.18 139.71 23.18 139.71 22.05 138.57 22.05 138.57 20.92 139.71 20.92 139.71 19.79 138.57 19.79 137.44 19.79 136.31 19.79 135.18 19.79 135.18 20.92 135.18 22.05" fill="#363332"/><rect x="139.71" y="20.92" width="1.13" height="1.13" fill="#363332"/><rect x="143.1" y="20.92" width="1.13" height="1.13" fill="#363332"/><polygon points="144.23 22.05 144.23 23.18 145.37 23.18 146.5 23.18 146.5 22.05 146.5 20.92 145.37 20.92 145.37 22.05 144.23 22.05" fill="#363332"/><polygon points="139.71 23.18 139.71 24.32 140.84 24.32 141.97 24.32 143.1 24.32 143.1 23.18 141.97 23.18 141.97 22.05 140.84 22.05 140.84 23.18 139.71 23.18" fill="#363332"/><polygon points="140.84 26.58 141.97 26.58 143.1 26.58 144.23 26.58 144.23 25.45 143.1 25.45 141.97 25.45 140.84 25.45 139.71 25.45 139.71 26.58 140.84 26.58" fill="#363332"/><rect x="138.58" y="26.58" width="1.13" height="1.13" fill="#363332"/><rect x="124.99" y="6.21" width="3.4" height="3.4" fill="#00a4ce"/><path d="M130.65,3.94h-7.92v7.93h7.92Zm-1.13,6.79h-5.66V5.07h5.66Z" fill="#00a4ce"/><rect x="140.84" y="6.21" width="3.4" height="3.4" fill="#00a4ce"/><polygon points="136.31 6.21 137.44 6.21 137.44 5.07 136.31 5.07 136.31 3.94 135.18 3.94 134.05 3.94 132.92 3.94 132.92 5.07 134.05 5.07 134.05 6.21 134.05 7.34 135.18 7.34 135.18 6.21 136.31 6.21" fill="#00a4ce"/><polygon points="136.31 15.26 135.18 15.26 135.18 14.13 136.31 14.13 136.31 13 137.44 13 137.44 11.87 137.44 10.73 137.44 9.6 137.44 8.47 137.44 7.34 136.31 7.34 135.18 7.34 135.18 8.47 136.31 8.47 136.31 9.6 136.31 10.73 136.31 11.87 135.18 11.87 135.18 13 134.05 13 132.92 13 132.92 14.13 134.05 14.13 134.05 15.26 132.92 15.26 132.92 16.39 134.05 16.39 135.18 16.39 135.18 17.52 135.18 18.66 136.31 18.66 136.31 17.52 136.31 16.39 137.44 16.39 137.44 17.52 138.57 17.52 138.57 16.39 138.57 15.26 137.44 15.26 136.31 15.26" fill="#00a4ce"/><polygon points="129.52 16.39 128.39 16.39 128.39 17.52 127.26 17.52 127.26 16.39 128.39 16.39 128.39 15.26 129.52 15.26 129.52 14.13 130.65 14.13 130.65 13 129.52 13 128.39 13 127.26 13 126.13 13 124.99 13 124.99 14.13 124.99 15.26 126.13 15.26 126.13 14.13 127.26 14.13 127.26 15.26 126.13 15.26 126.13 16.39 126.13 17.52 124.99 17.52 124.99 16.39 123.86 16.39 123.86 15.26 123.86 14.13 123.86 13 122.73 13 122.73 14.13 122.73 15.26 122.73 16.39 122.73 17.52 123.86 17.52 123.86 18.66 124.99 18.66 126.13 18.66 127.26 18.66 128.39 18.66 129.52 18.66 130.65 18.66 130.65 17.52 129.52 17.52 129.52 16.39" fill="#00a4ce"/><polygon points="137.44 24.32 136.31 24.32 135.18 24.32 135.18 23.18 134.05 23.18 132.92 23.18 132.92 22.05 132.92 20.92 131.78 20.92 131.78 22.05 131.78 23.18 131.78 24.32 131.78 25.45 132.92 25.45 132.92 24.32 134.05 24.32 134.05 25.45 134.05 26.58 132.92 26.58 131.78 26.58 131.78 27.71 132.92 27.71 134.05 27.71 135.18 27.71 136.31 27.71 136.31 26.58 135.18 26.58 135.18 25.45 136.31 25.45 137.44 25.45 138.57 25.45 139.71 25.45 139.71 24.32 138.57 24.32 137.44 24.32" fill="#00a4ce"/><rect x="144.23" y="26.58" width="1.13" height="1.13" fill="#00a4ce"/><path d="M3.46,7v7.78h9.32v2.8H3.46v9.86H0V4.2H14.4V7Z" fill="#00a4ce"/><path d="M31,24.54v2.9H17.66V4.2H21.1V24.54Z" fill="#00a4ce"/><path d="M41.43,24.67a6.32,6.32,0,0,0,2.49-.47,5.17,5.17,0,0,0,1.86-1.32,5.86,5.86,0,0,0,1.17-2,8,8,0,0,0,.4-2.6V4.2h3.43V18.26A10.48,10.48,0,0,1,50.13,22a8.5,8.5,0,0,1-1.86,3,8.38,8.38,0,0,1-2.94,2,11.07,11.07,0,0,1-7.8,0,8.29,8.29,0,0,1-2.94-2,8.66,8.66,0,0,1-1.87-3,10.7,10.7,0,0,1-.64-3.77V4.2h3.44V18.25a8.29,8.29,0,0,0,.4,2.6,5.64,5.64,0,0,0,1.16,2,5,5,0,0,0,1.86,1.32A6.32,6.32,0,0,0,41.43,24.67Z" fill="#00a4ce"/><path d="M59.5,27.44H56V4.2H59.5Z" fill="#00a4ce"/><path d="M81.33,22.45a.69.69,0,0,1,.51.23l1.35,1.49a9.53,9.53,0,0,1-3.47,2.6,11.81,11.81,0,0,1-4.92.92,11.56,11.56,0,0,1-4.57-.87,10,10,0,0,1-3.5-2.44,11.13,11.13,0,0,1-2.24-3.76,13.89,13.89,0,0,1-.79-4.8A13.53,13.53,0,0,1,64.53,11a11.24,11.24,0,0,1,2.34-3.75,10.39,10.39,0,0,1,3.6-2.44,11.81,11.81,0,0,1,4.64-.88,11.28,11.28,0,0,1,4.4.81,11.09,11.09,0,0,1,3.35,2.16L81.72,8.5a1,1,0,0,1-.28.3.83.83,0,0,1-.45.11,1.27,1.27,0,0,1-.72-.31,10,10,0,0,0-1.08-.68,7.91,7.91,0,0,0-1.66-.69,8.23,8.23,0,0,0-2.46-.31,8,8,0,0,0-3.17.61,6.89,6.89,0,0,0-2.48,1.74,8,8,0,0,0-1.62,2.8,11.54,11.54,0,0,0-.57,3.75,11,11,0,0,0,.59,3.77,8.34,8.34,0,0,0,1.65,2.8A7,7,0,0,0,72,24.13a7.82,7.82,0,0,0,3.07.6,12.39,12.39,0,0,0,1.81-.12,7.9,7.9,0,0,0,1.47-.36,6.49,6.49,0,0,0,1.27-.62,8.79,8.79,0,0,0,1.18-.92,1.21,1.21,0,0,1,.28-.18A.64.64,0,0,1,81.33,22.45Z" fill="#00a4ce"/><path d="M100,8a1.27,1.27,0,0,1-.34.4.73.73,0,0,1-.45.13,1.19,1.19,0,0,1-.67-.27l-.93-.6a7.55,7.55,0,0,0-1.33-.59,5.7,5.7,0,0,0-1.86-.27,5.39,5.39,0,0,0-1.79.27,3.85,3.85,0,0,0-1.29.73,3.08,3.08,0,0,0-.78,1.08,3.36,3.36,0,0,0-.27,1.35,2.43,2.43,0,0,0,.48,1.55A4.06,4.06,0,0,0,92,12.82a9.82,9.82,0,0,0,1.76.77l2,.67a20.68,20.68,0,0,1,2,.8,6.83,6.83,0,0,1,1.76,1.14,5.3,5.3,0,0,1,1.26,1.68,5.77,5.77,0,0,1,.47,2.44,7.87,7.87,0,0,1-.52,2.88,6.78,6.78,0,0,1-1.53,2.34,7,7,0,0,1-2.47,1.58,9.06,9.06,0,0,1-3.32.57,11,11,0,0,1-2.17-.21,10.49,10.49,0,0,1-2-.62,9.92,9.92,0,0,1-1.76-.95,8.88,8.88,0,0,1-1.46-1.26l1-1.65a1.15,1.15,0,0,1,.34-.32.82.82,0,0,1,.46-.13,1.34,1.34,0,0,1,.79.36c.3.23.66.5,1.1.78a7.92,7.92,0,0,0,1.57.78,6.07,6.07,0,0,0,2.22.36,5.91,5.91,0,0,0,1.91-.28,3.94,3.94,0,0,0,1.42-.81,3.45,3.45,0,0,0,.88-1.27,4.22,4.22,0,0,0,.31-1.65,2.8,2.8,0,0,0-.47-1.67,3.78,3.78,0,0,0-1.25-1.08,9.22,9.22,0,0,0-1.76-.75c-.66-.2-1.33-.41-2-.64a19.52,19.52,0,0,1-2-.76,7.06,7.06,0,0,1-1.77-1.14A5.08,5.08,0,0,1,87.58,13a6.31,6.31,0,0,1-.47-2.61A6.24,6.24,0,0,1,87.59,8,6,6,0,0,1,89,5.93,7.07,7.07,0,0,1,91.3,4.48a8.32,8.32,0,0,1,3.1-.54,9.93,9.93,0,0,1,3.6.63,8.33,8.33,0,0,1,2.86,1.78Z" fill="#00a4ce"/><path d="M107.88,4.21a3.39,3.39,0,0,1,1.35.27,3.61,3.61,0,0,1,1.1.74,3.67,3.67,0,0,1,.74,1.1,3.39,3.39,0,0,1,.27,1.35A3.34,3.34,0,0,1,111.07,9a3.8,3.8,0,0,1-.74,1.1,3.61,3.61,0,0,1-1.1.74,3.39,3.39,0,0,1-1.35.27A3.52,3.52,0,0,1,107,11a3.47,3.47,0,0,1-2.06-1.59,3.49,3.49,0,0,1-.35-.82,3.2,3.2,0,0,1-.13-.92,3.1,3.1,0,0,1,.13-.92,3.39,3.39,0,0,1,.35-.83,4,4,0,0,1,.54-.7A3.51,3.51,0,0,1,107,4.33,3.52,3.52,0,0,1,107.88,4.21Zm0,6.45a3,3,0,0,0,.79-.11,2.93,2.93,0,0,0,1.77-1.36,3.19,3.19,0,0,0,.29-.72,3,3,0,0,0,.11-.8,3.1,3.1,0,0,0-.11-.81,2.86,2.86,0,0,0-.29-.72,2.79,2.79,0,0,0-.46-.61,3,3,0,0,0-.6-.47,3,3,0,0,0-.71-.3,3,3,0,0,0-.79-.11,3,3,0,0,0-.79.11,2.74,2.74,0,0,0-.7.3,3,3,0,0,0-.6.47,2.47,2.47,0,0,0-.45.61,2.88,2.88,0,0,0-.3.72,3.29,3.29,0,0,0,0,1.61,3.23,3.23,0,0,0,.3.72,2.62,2.62,0,0,0,.45.6,3,3,0,0,0,.6.46,2.74,2.74,0,0,0,.7.3A3,3,0,0,0,107.88,10.66Zm0-5.11a2.06,2.06,0,0,1,1.23.3,1,1,0,0,1,.39.88,1.2,1.2,0,0,1-.24.75,1.25,1.25,0,0,1-.73.44.45.45,0,0,1,.15.13,1.25,1.25,0,0,1,.12.17l1,1.55H109a.26.26,0,0,1-.25-.14l-.88-1.37a.32.32,0,0,0-.1-.1.42.42,0,0,0-.18,0h-.35V9.77h-.81V5.55Zm-.08,2a1.74,1.74,0,0,0,.43,0,.71.71,0,0,0,.29-.14.48.48,0,0,0,.15-.22,1,1,0,0,0,0-.31.85.85,0,0,0,0-.29.41.41,0,0,0-.14-.21.65.65,0,0,0-.25-.12,1.54,1.54,0,0,0-.4,0h-.59V7.54Z" fill="#00a4ce"/></svg>
+      <span class="text-sm font-medium text-gray-500 hidden sm:inline">PRINT Studio</span>
+    </div>
+    <button onclick="openSettings()" title="Settings" class="p-1.5 rounded text-gray-400 hover:text-gray-700 hover:bg-gray-100 transition-colors">
+      <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/>
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+      </svg>
+    </button>
+  </header>
+
+  <!-- Tabs -->
+  <div class="bg-white border-b border-gray-200">
+    <nav class="flex overflow-x-auto scrollbar-hide px-2 sm:px-6">
+      <button onclick="setTab('print')" id="tab-print" class="tab-btn px-3 sm:px-4 py-2.5 sm:py-3 text-xs sm:text-sm font-medium border-b-2 -mb-px transition-colors whitespace-nowrap">Print</button>
+      <button onclick="setTab('configure')" id="tab-configure" class="tab-btn px-3 sm:px-4 py-2.5 sm:py-3 text-xs sm:text-sm font-medium border-b-2 -mb-px transition-colors whitespace-nowrap">Configure</button>
+      <button onclick="setTab('templates')" id="tab-templates" class="tab-btn px-3 sm:px-4 py-2.5 sm:py-3 text-xs sm:text-sm font-medium border-b-2 -mb-px transition-colors whitespace-nowrap">Templates</button>
+      <button onclick="setTab('groups')" id="tab-groups" class="tab-btn px-3 sm:px-4 py-2.5 sm:py-3 text-xs sm:text-sm font-medium border-b-2 -mb-px transition-colors whitespace-nowrap">Groups</button>
+      <button onclick="setTab('notes')" id="tab-notes" class="tab-btn px-3 sm:px-4 py-2.5 sm:py-3 text-xs sm:text-sm font-medium border-b-2 -mb-px transition-colors whitespace-nowrap">Notes</button>
+      <button onclick="setTab('audit')" id="tab-audit" class="tab-btn px-3 sm:px-4 py-2.5 sm:py-3 text-xs sm:text-sm font-medium border-b-2 -mb-px transition-colors whitespace-nowrap">Audit Log</button>
+    </nav>
+  </div>
+
+  <main class="max-w-3xl mx-auto px-4 sm:px-6 py-5 sm:py-8">
+
+    <!-- ── PRINT TAB ── -->
+    <div id="view-print">
+      <div class="bg-white rounded-lg border border-gray-200 p-4 sm:p-6 space-y-4 sm:space-y-5">
+
+        <!-- Dynamic variable inputs rendered by JS based on type -->
+        <div id="var-inputs-container" class="grid grid-cols-1 sm:grid-cols-2 gap-4"></div>
+
+        <!-- Date + User -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div>
+            <label class="field-label" id="date-field-label">Date</label>
+            <input id="date-input" type="date" class="field-input w-full" oninput="refreshPreview(); updateDatePreview()">
+            <div id="date-format-preview" class="text-xs text-gray-400 mt-1 min-h-[1rem]"></div>
+          </div>
+          <div id="user-input-container"></div>
+        </div>
+
+        <!-- Group toggle — shown when selected product belongs to a group -->
+        <div id="group-toggle-row" class="hidden"></div>
+
+        <!-- Printer + Template -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div>
+            <label class="field-label">Printer</label>
+            <div class="flex gap-2">
+              <select id="printer-select" onchange="S.lastUsed.printer=this.value; save()" class="field-input flex-1">
+                <option value="">— load printers —</option>
+              </select>
+              <button onclick="loadPrinters()" title="Refresh printers" class="px-3 py-2 border border-gray-300 rounded text-gray-500 hover:bg-gray-50 hover:text-gray-700 transition-colors text-base leading-none">↻</button>
+            </div>
+          </div>
+          <div>
+            <label class="field-label">Template</label>
+            <select id="template-select" onchange="refreshPreview()" class="field-input w-full">
+              <option value="">— select template —</option>
+            </select>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Preview -->
+      <div class="mt-6">
+        <div class="flex items-center justify-between mb-3">
+          <h2 class="text-sm font-semibold text-gray-700">Preview</h2>
+          <div class="flex items-center gap-3">
+            <div class="flex rounded border border-gray-200 overflow-hidden text-xs">
+              <button onclick="setPreviewMode('table')"  id="preview-tab-table"  class="px-2.5 py-1 bg-blue-600 text-white">Table</button>
+              <button onclick="setPreviewMode('visual')" id="preview-tab-visual" class="px-2.5 py-1 text-gray-500 hover:bg-gray-50">Visual</button>
+            </div>
+            <span id="label-count" class="text-sm text-gray-400">0 labels</span>
+          </div>
+        </div>
+        <div id="preview-warning" class="hidden mb-2 px-3 py-2 bg-amber-50 border border-amber-200 rounded-lg text-xs text-amber-700"></div>
+
+        <!-- Table mode -->
+        <div id="preview-table-pane" class="bg-white rounded-lg border border-gray-200 overflow-hidden">
+          <div class="overflow-auto max-h-60">
+            <table class="w-full text-xs whitespace-nowrap">
+              <thead class="bg-gray-50 border-b border-gray-200 sticky top-0">
+                <tr id="preview-head-row"><th class="th">#</th></tr>
+              </thead>
+              <tbody id="preview-body">
+                <tr><td colspan="8" class="px-3 py-5 text-center text-gray-400 italic text-sm">Fill in the form above to preview labels</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Visual mode -->
+        <div id="preview-visual-pane" class="hidden">
+          <div class="flex items-center justify-between mb-2">
+            <div class="flex items-center gap-2">
+              <button type="button" onclick="labelaryNav(-1)" id="lbl-prev" class="px-2 py-1 text-xs border border-gray-200 rounded hover:bg-gray-50 disabled:opacity-30">‹ Prev</button>
+              <span id="lbl-nav-info" class="text-xs text-gray-400 min-w-[4rem] text-center">—</span>
+              <button type="button" onclick="labelaryNav(1)"  id="lbl-next" class="px-2 py-1 text-xs border border-gray-200 rounded hover:bg-gray-50 disabled:opacity-30">Next ›</button>
+            </div>
+            <button type="button" onclick="clearLabelaryCache(); renderLabelaryPreview()" class="btn-secondary text-xs">↻ Render</button>
+          </div>
+          <div id="labelary-container" class="bg-gray-100 rounded-lg flex items-center justify-center min-h-32 p-4 text-sm text-gray-400 italic">
+            Select a template and fill in the form, then click Render
+          </div>
+          <p class="text-xs text-gray-400 mt-1.5 text-right">Rendered by <a href="http://labelary.com" target="_blank" class="underline hover:text-gray-600">Labelary</a> — label size configured per template</p>
+        </div>
+      </div>
+
+      <!-- Actions -->
+      <div class="mt-4 space-y-3">
+        <button onclick="printLabels()" id="print-btn" class="w-full sm:w-auto px-5 py-2.5 bg-blue-600 hover:bg-blue-700 text-white text-sm font-medium rounded transition-colors disabled:opacity-40 disabled:cursor-not-allowed">
+          Print Labels
+        </button>
+        <div id="print-status" style="display:none"></div>
+      </div>
+    </div>
+
+    <!-- ── CONFIGURE TAB ── -->
+    <div id="view-configure" class="hidden space-y-5">
+
+      <!-- 1. Printers -->
+      <div class="bg-white rounded-lg border border-gray-200 p-6">
+        <div class="flex items-center justify-between mb-4">
+          <h2 class="text-sm font-semibold text-gray-800">Printers</h2>
+          <button onclick="loadPrinters()" class="btn-secondary text-xs">↻ Refresh</button>
+        </div>
+        <div id="printers-list"></div>
+      </div>
+
+      <!-- 2. Variables -->
+      <div class="bg-white rounded-lg border border-gray-200 p-6">
+        <div class="flex items-center justify-between mb-1">
+          <h2 class="text-sm font-semibold text-gray-800">Variables</h2>
+          <button onclick="saveVariables()" class="btn-secondary text-xs">Save</button>
+        </div>
+        <p class="text-xs text-gray-400 mb-4">ZPL token is derived from the label. For dropdowns, paste values — one per line.</p>
+        <div id="variables-table"></div>
+      </div>
+
+    </div>
+
+    <!-- ── TEMPLATES TAB ── -->
+    <div id="view-templates" class="hidden">
+      <div class="bg-white rounded-lg border border-gray-200 p-6">
+        <div class="flex items-center justify-between mb-4">
+          <h2 class="text-sm font-semibold text-gray-800">Label Templates</h2>
+          <button onclick="openAddTemplate()" class="btn-secondary text-xs">+ Add Template</button>
+        </div>
+        <div id="var-reference" class="bg-blue-50 border border-blue-100 rounded-md p-3 mb-5 text-xs text-blue-700 leading-relaxed"></div>
+        <div id="templates-list" class="space-y-4"></div>
+      </div>
+    </div>
+
+    <!-- ── AUDIT LOG TAB ── -->
+    <div id="view-audit" class="hidden">
+      <div class="bg-white rounded-lg border border-gray-200 p-6">
+        <div class="flex items-center justify-between mb-4">
+          <div>
+            <h2 class="text-sm font-semibold text-gray-800">Audit Log</h2>
+            <p class="text-xs text-gray-400 mt-0.5">All print attempts — most recent first. Max 500 entries.</p>
+          </div>
+          <div class="flex gap-2">
+            <button onclick="exportAuditLog()" class="btn-secondary text-xs">↓ Export CSV</button>
+            <button onclick="clearAuditLog()" class="btn-secondary text-xs" style="color:#dc2626">Clear</button>
+          </div>
+        </div>
+        <div id="audit-list"></div>
+      </div>
+    </div>
+
+    <!-- ── GROUPS TAB ── -->
+    <div id="view-groups" class="hidden">
+      <div class="bg-white rounded-lg border border-gray-200 p-6">
+        <div class="flex items-center justify-between mb-1">
+          <div>
+            <h2 class="text-sm font-semibold text-gray-800">Label Groups</h2>
+            <p class="text-xs text-gray-400 mt-0.5">Assign products to a group and define the set of test/sample labels to print for that group.</p>
+          </div>
+          <button onclick="addGroup()" class="btn-secondary text-xs">+ New Group</button>
+        </div>
+        <div id="groups-list" class="space-y-4 mt-4"></div>
+      </div>
+    </div>
+
+    <!-- ── NOTES TAB ── -->
+    <div id="view-notes" class="hidden">
+      <div class="bg-white rounded-lg border border-gray-200 p-6">
+        <h2 class="text-sm font-semibold text-gray-800 mb-1">Notes &amp; Ideas</h2>
+        <p class="text-xs text-gray-400 mb-3">Ideas for further improvement, reminders, anything goes.</p>
+        <textarea id="notes-input" oninput="saveNotes()"
+          class="w-full h-96 border border-gray-200 rounded-lg px-3 py-2.5 text-sm text-gray-700 resize-y focus:outline-none focus:ring-2 focus:ring-blue-200 focus:border-blue-400"
+          placeholder="Write your ideas here…"></textarea>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- Barcode / QR Scanner overlay -->
+  <div id="scanner-overlay" class="hidden fixed inset-0 bg-black/70 z-50 flex items-end sm:items-center justify-center p-4">
+    <div class="bg-white rounded-xl w-full max-w-sm shadow-xl">
+      <div class="flex items-center justify-between px-4 py-3 border-b border-gray-100">
+        <span class="text-sm font-semibold text-gray-800">Scan Code</span>
+        <button onclick="closeScanner()" class="text-gray-400 hover:text-gray-600 text-2xl leading-none">&times;</button>
+      </div>
+      <div class="p-3">
+        <video id="scanner-video" class="w-full rounded-lg bg-black aspect-video object-cover" playsinline muted></video>
+        <p id="scanner-status" class="text-xs text-gray-500 text-center mt-2 min-h-[1.25rem]"></p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Settings Modal -->
+  <div id="settings-modal" class="modal-backdrop hidden">
+    <div class="modal-box w-full max-w-md">
+      <h2 class="modal-title">Settings</h2>
+      <div class="space-y-4">
+        <div>
+          <label class="field-label">API Key</label>
+          <input id="settings-api-key" type="password" class="field-input w-full font-mono" placeholder="your-api-key">
+        </div>
+        <div>
+          <label class="field-label">Base URL</label>
+          <input id="settings-base-url" type="text" class="field-input w-full font-mono">
+        </div>
+      </div>
+      <div class="border-t border-gray-100 pt-4 mt-2">
+        <div class="flex items-start justify-between gap-4">
+          <div>
+            <p class="text-xs font-medium text-gray-700 mb-0.5">Visual label preview</p>
+            <p class="text-xs text-gray-400">Uses <a href="https://labelary.com" target="_blank" class="underline hover:text-gray-600">Labelary</a>, a third-party service. Your ZPL code is sent to their servers for rendering. Review their <a href="https://labelary.com/terms.html" target="_blank" class="underline hover:text-gray-600">Terms of Service</a> before enabling.</p>
+          </div>
+          <label class="flex items-center cursor-pointer shrink-0 mt-0.5">
+            <div class="relative">
+              <input type="checkbox" id="settings-labelary-enabled" class="sr-only peer">
+              <div class="w-9 h-5 bg-gray-200 rounded-full peer peer-checked:bg-blue-600 transition-colors"></div>
+              <div class="absolute top-0.5 left-0.5 w-4 h-4 bg-white rounded-full shadow transition-transform peer-checked:translate-x-4"></div>
+            </div>
+          </label>
+        </div>
+      </div>
+      <div class="border-t border-gray-100 pt-4 mt-2">
+        <p class="text-xs text-gray-400 mb-2">Transfer config to another computer</p>
+        <div class="flex gap-2">
+          <button onclick="exportState()" class="btn-secondary text-xs flex-1">↓ Export</button>
+          <label class="btn-secondary text-xs flex-1 text-center cursor-pointer">
+            ↑ Import
+            <input type="file" accept=".json" class="hidden" onchange="importState(this.files[0])">
+          </label>
+        </div>
+      </div>
+      <div class="modal-actions">
+        <button onclick="closeSettings()" class="btn-ghost">Cancel</button>
+        <button onclick="saveSettings()" class="btn-primary">Save</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Generic Modal -->
+  <div id="modal" class="modal-backdrop hidden">
+    <div class="modal-box w-full max-w-3xl">
+      <h2 id="modal-title" class="modal-title"></h2>
+      <div id="modal-body" class="space-y-4"></div>
+      <div class="modal-actions">
+        <button onclick="closeModal()" class="btn-ghost">Cancel</button>
+        <button onclick="modalSave()" class="btn-primary">Save</button>
+      </div>
+    </div>
+  </div>
+
+  <style>
+    .field-label { display: block; font-size: 0.7rem; font-weight: 500; color: #6b7280; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.25rem; }
+    .field-input { border: 1px solid #d1d5db; border-radius: 0.375rem; padding: 0.5rem 0.75rem; font-size: 0.875rem; outline: none; background: white; }
+    .field-input:focus { border-color: #3b82f6; box-shadow: 0 0 0 2px rgba(59,130,246,0.2); }
+    .th { padding: 0.5rem 0.75rem; text-align: left; font-weight: 500; color: #6b7280; }
+    .btn-primary { padding: 0.5rem 1rem; background: #2563eb; color: white; font-size: 0.875rem; font-weight: 500; border-radius: 0.375rem; transition: background 0.15s; cursor: pointer; }
+    .btn-primary:hover { background: #1d4ed8; }
+    .btn-secondary { padding: 0.375rem 0.75rem; background: #f9fafb; border: 1px solid #d1d5db; color: #374151; border-radius: 0.375rem; transition: background 0.15s; cursor: pointer; }
+    .btn-secondary:hover { background: #f3f4f6; }
+    .btn-ghost { padding: 0.5rem 1rem; border: 1px solid #d1d5db; color: #374151; font-size: 0.875rem; border-radius: 0.375rem; transition: background 0.15s; cursor: pointer; }
+    .btn-ghost:hover { background: #f9fafb; }
+    .modal-backdrop { position: fixed; inset: 0; background: rgba(0,0,0,0.4); display: flex; align-items: center; justify-content: center; z-index: 50; }
+    .modal-backdrop.hidden { display: none; }
+    .modal-box { background: white; border-radius: 0.5rem; border: 1px solid #e5e7eb; padding: 1.5rem; box-shadow: 0 20px 25px -5px rgba(0,0,0,0.1); }
+    .modal-title { font-weight: 600; color: #111827; margin-bottom: 1.25rem; }
+    .modal-actions { display: flex; justify-content: flex-end; gap: 0.5rem; margin-top: 1.5rem; }
+    .list-row { display: flex; align-items: center; justify-content: space-between; padding: 0.5rem 0; border-bottom: 1px solid #f3f4f6; }
+    .list-row:last-child { border-bottom: none; }
+  </style>
+
+<script>
+/**
+ * FLUICS PRINT Studio
+ *
+ * Single-file web app for configuring and sending bulk ZPL label print jobs
+ * to FLUICS PRINT API-connected printers.
+ *
+ * Architecture:
+ *   - No build step, no server. Runs entirely in the browser.
+ *   - All state is persisted in localStorage under the key "lr_state".
+ *   - UI is rendered by vanilla JS functions that write innerHTML. There is no
+ *     virtual DOM or reactive framework — functions re-render their section
+ *     whenever state changes.
+ *   - The FLUICS Print API is called directly from the browser using the
+ *     x-api-key header. The API key is stored in localStorage (plaintext).
+ *   - ZPL templates use ${TOKEN} placeholders. Tokens are derived at runtime
+ *     from variable labels (uppercased, spaces→underscores).
+ *
+ * Tabs:
+ *   Print      — select inputs, preview labels, send to printer
+ *   Configure  — rename printers, configure variable types/labels/presets
+ *   Templates  — manage ZPL templates with per-template label dimensions
+ *   Notes      — free-text scratchpad, persisted in state
+ *   Audit Log  — immutable record of every print attempt with full ZPL payload
+ *   Groups     — assign products to groups with fixed label sets
+ *
+ * State shape (see DEFAULTS for the authoritative structure):
+ *   S.settings        — API key, base URL, Labelary toggle
+ *   S.templates[]     — ZPL templates: { id, name, zpl, labelWidth, labelHeight, labelDpmm }
+ *   S.variables[]     — variable definitions: { id, key, label, type, presets?, format? }
+ *   S.printerNames    — map of LID → custom display name
+ *   S.lastUsed        — persisted form selections restored on next load
+ *   S.groups[]      — label groups: { id, name, products[], labelSet[] }
+ *   S.auditLog[]      — print event records: { ts, user, printer, template, count, status, error?, zpl[] }
+ *   S.notes           — free-text string
+ *
+ * FLUICS Print API:
+ *   Base:    https://print-api.fluics.com/latest
+ *   Auth:    x-api-key header
+ *   List:    GET  /get_printers_list
+ *   Print:   POST /{LID}/batchprint  body: [{id, data: ZPL}]  (no ^XA/^XZ wrappers)
+ *   200 → { status: "OK" }
+ *   408 → { status: "error", printerStatus: "TIMEOUT", details: "..." }  (printer offline)
+ *   4xx → { error: { message, code } }
+ *   Timeout: 28 s — if the printer does not respond in time a 408 is returned.
+ *
+ * Labelary API (optional, third-party):
+ *   POST https://api.labelary.com/v1/printers/{dpmm}dpmm/labels/{w}x{h}/0/
+ *   Body: full ZPL including ^XA / ^XZ wrappers. Returns PNG image.
+ *   Rendered images are blob-URL-cached per ZPL string; cache is cleared
+ *   whenever any form input changes.
+ */
+
+// ── State ──────────────────────────────────────────────────────────────────────
+
+/**
+ * Factory defaults. Deep-cloned whenever a fresh state is needed.
+ * Also used as the migration target — any field missing from a saved state
+ * is filled in by loadState() from this object or set to a safe default.
+ */
+const DEFAULTS = {
+  settings: { apiKey: '', baseUrl: 'https://print-api.fluics.com/latest', labelaryEnabled: true },
+  templates: [],
+  auditLog: [],
+  lastUsed: { printer: '', template: '', varInputs: {}, groupMode: false },
+  printerNames: {},
+  groups: [],
+  variables: [
+    { key: 'date',    label: 'Date',         type: 'date', format: 'YYYY-MM-DD' },
+    { key: 'user',    label: 'User',         type: 'free', presets: [] },
+    { key: 'counter', label: 'Sample #',     type: 'free', presets: [] },
+    { key: 'var1',    label: 'Product Name', type: 'free', presets: [] },
+    { key: 'var2',    label: 'Batch ID',     type: 'free', presets: [] },
+    { key: 'var3',    label: 'Test Name',    type: 'free', presets: [] },
+  ]
+};
+
+/**
+ * Fallback variable types used when migrating old saves that stored
+ * the now-removed 'auto' and 'user' type values.
+ */
+const TYPE_DEFAULTS = { user:'free', date:'date', counter:'free', var1:'free', var2:'free', var3:'free' };
+
+/** Live application state. Loaded from localStorage on startup. */
+let S = loadState();
+
+/** Printer list fetched from the API. Cached in memory; re-fetched on demand. */
+let printers = [];
+
+/** Callback set by showModal(); called when the user confirms the modal. */
+let modalAction = null;
+
+/** ID of the template currently being edited in the modal, or null for new. */
+let editingId = null;
+
+/** Whether Group Mode is currently active. Persisted in S.lastUsed.groupMode. */
+let groupModeActive = S.lastUsed?.groupMode || false;
+
+/**
+ * Load and migrate application state from localStorage.
+ * Handles all historical schema versions so old saves always open cleanly.
+ * Falls back to DEFAULTS if the stored JSON is missing or unparseable.
+ * @returns {object} Fully-normalised state object ready to assign to S.
+ */
+function loadState() {
+  try {
+    const raw = localStorage.getItem('lr_state');
+    const s = raw ? JSON.parse(raw) : JSON.parse(JSON.stringify(DEFAULTS));
+
+    if (!s.variables) s.variables = JSON.parse(JSON.stringify(DEFAULTS.variables));
+
+    // Ensure every variable key defined in DEFAULTS exists in the loaded state.
+    // This allows adding new variables in future without breaking old saves.
+    DEFAULTS.variables.forEach(dv => {
+      if (!s.variables.find(v => v.key === dv.key))
+        s.variables.push(JSON.parse(JSON.stringify(dv)));
+    });
+
+    s.variables.forEach(v => {
+      if (!v.id) v.id = crypto.randomUUID();
+      // Old saves used 'auto' and 'user' as type values — normalise to the
+      // current two-value system ('free' | 'dropdown', or 'date' for the date var).
+      if (!v.type || v.type === 'auto' || v.type === 'user') v.type = TYPE_DEFAULTS[v.key] || 'free';
+      if (v.key === 'date' && !v.format) v.format = 'YYYY-MM-DD';
+      // Old saves stored presets as { id, name, short } objects — flatten to strings.
+      if (Array.isArray(v.presets) && v.presets.length && typeof v.presets[0] === 'object') {
+        v.presets = v.presets.map(p => p.short || p.name || '').filter(Boolean);
+      }
+      if (!Array.isArray(v.presets)) v.presets = [];
+    });
+
+    // Migrate S.users[] → user variable presets (users management was removed).
+    const userV = s.variables.find(v => v.key === 'user');
+    if (userV && !userV.presets.length && s.users?.length) {
+      userV.presets = [...s.users];
+      userV.type = 'dropdown';
+    }
+
+    // Migrate S.products[] → var1 presets (products management was removed).
+    const var1 = s.variables.find(v => v.key === 'var1');
+    if (var1 && !var1.presets.length && s.products?.length) {
+      var1.presets = s.products.map(p => p.short || p.name).filter(Boolean);
+      var1.type = 'dropdown';
+    }
+
+    // Migrate S.tests[] → var3 presets (tests management was removed).
+    const var3 = s.variables.find(v => v.key === 'var3');
+    if (var3 && !var3.presets.length && s.tests?.length) {
+      var3.presets = s.tests.map(t => t.name).filter(Boolean);
+      var3.type = 'dropdown';
+    }
+
+    // Remove stale top-level fields left over from removed features.
+    delete s.users; delete s.products; delete s.tests; delete s.profiles;
+
+    if (!s.lastUsed) s.lastUsed = { printer: '', template: '', varInputs: {}, groupMode: false };
+    if (typeof s.lastUsed.groupMode !== 'boolean') s.lastUsed.groupMode = false;
+    if (!s.printerNames) s.printerNames = {};
+    if (!Array.isArray(s.auditLog)) s.auditLog = [];
+    // Migrate legacy 'families' key (renamed to 'groups').
+    if (s.families && !s.groups) { s.groups = s.families; delete s.families; }
+    if (!Array.isArray(s.groups)) s.groups = [];
+    s.groups.forEach(f => {
+      if (!Array.isArray(f.products))  f.products  = [];
+      if (!Array.isArray(f.labelSet))  f.labelSet  = [];
+      f.labelSet.forEach(r => { if (!r.id) r.id = crypto.randomUUID(); });
+    });
+
+    // Migrate label dimensions: renamed from lbl* → label*, and moved from
+    // S.settings (very old saves) to per-template fields.
+    (s.templates || []).forEach(t => {
+      if (!t.labelWidth)  t.labelWidth  = t.labelWidth  ?? s.settings?.labelWidth  ?? 1;
+      if (!t.labelHeight) t.labelHeight = t.labelHeight ?? s.settings?.labelHeight ?? 0.5;
+      if (!t.labelDpmm)   t.labelDpmm   = t.labelDpmm   ?? s.settings?.labelDpmm   ?? 12;
+      delete t.labelWidth; delete t.labelHeight; delete t.labelDpmm;
+    });
+    delete s.settings?.labelWidth;
+    delete s.settings?.labelHeight;
+    delete s.settings?.labelDpmm;
+
+    // Migrate very old lastUsed shape that used var1Id / batchId keys.
+    if (!s.lastUsed.varInputs) {
+      s.lastUsed.varInputs = {};
+      if (s.lastUsed.var1Id)  s.lastUsed.varInputs['var1'] = s.lastUsed.var1Id;
+      if (s.lastUsed.batchId) s.lastUsed.varInputs['var2'] = s.lastUsed.batchId;
+    }
+
+    return s;
+  } catch { return JSON.parse(JSON.stringify(DEFAULTS)); }
+}
+
+/** Persist the current state to localStorage. Called after every mutation. */
+function save() { localStorage.setItem('lr_state', JSON.stringify(S)); }
+
+/** Generate a collision-resistant unique ID for templates, groups, audit entries, etc. */
+const uid = () => crypto.randomUUID();
+
+// ── Variable helpers ───────────────────────────────────────────────────────────
+
+/**
+ * Display order and role labels for variables shown in the Configure tab.
+ * The key maps to S.variables[].key. role is the fixed UI label shown to
+ * the left of the editable name field.
+ * Note: var3 and var2 appear in reversed key order so that "Variable 2" (Test
+ * Name / var3) is listed before "Variable 3" (Batch ID / var2) in the UI.
+ */
+const ROLES = [
+  { key: 'date',    role: 'Date' },
+  { key: 'user',    role: 'User' },
+  { key: 'counter', role: 'Counter' },
+  { key: 'var1',    role: 'Variable 1' },
+  { key: 'var3',    role: 'Variable 2' },
+  { key: 'var2',    role: 'Variable 3' },
+];
+
+/**
+ * Supported date output formats selectable per variable in the Configure tab.
+ * id is passed to formatDate(); label is the human-readable description shown
+ * in the dropdown.
+ */
+const DATE_FORMATS = [
+  { id: 'DDMonYY',     label: '21Apr26  — Lab' },
+  { id: 'YYYY-MM-DD',  label: '2026-04-21 — ISO 8601' },
+  { id: 'DD/MM/YYYY',  label: '21/04/2026 — European' },
+  { id: 'MM/DD/YYYY',  label: '04/21/2026 — US' },
+  { id: 'DD.MM.YYYY',  label: '21.04.2026 — German' },
+  { id: 'DD-MM-YYYY',  label: '21-04-2026' },
+  { id: 'YYYY/MM/DD',  label: '2026/04/21' },
+  { id: 'DDMonYYYY',   label: '21Apr2026' },
+  { id: 'DD-Mon-YYYY', label: '21-Apr-2026' },
+];
+
+/**
+ * Convert an ISO date string (YYYY-MM-DD) to the selected output format.
+ * @param {string} iso  - Date string from a <input type="date"> value.
+ * @param {string} fmt  - Format id from DATE_FORMATS.
+ * @returns {string} Formatted date string, or the original iso if fmt is unknown.
+ */
+function formatDate(iso, fmt) {
+  if (!iso) return '';
+  const [y, m, d] = iso.split('-');
+  const MONTHS = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+  const mon = MONTHS[parseInt(m, 10) - 1] || m;
+  const yy  = y.slice(2);
+  switch (fmt) {
+    case 'DDMonYY':     return `${d}${mon}${yy}`;
+    case 'DDMonYYYY':   return `${d}${mon}${y}`;
+    case 'DD-Mon-YYYY': return `${d}-${mon}-${y}`;
+    case 'DD/MM/YYYY':  return `${d}/${m}/${y}`;
+    case 'MM/DD/YYYY':  return `${m}/${d}/${y}`;
+    case 'DD.MM.YYYY':  return `${d}.${m}.${y}`;
+    case 'DD-MM-YYYY':  return `${d}-${m}-${y}`;
+    case 'YYYY/MM/DD':  return `${y}/${m}/${d}`;
+    default:            return iso;
+  }
+}
+
+/** @returns {object} Variable definition for the given key, or a safe fallback. */
+function varBy(key) { return S.variables.find(v => v.key === key) || { key, label: key, type: 'free', presets: [] }; }
+
+/** @returns {string} The user-configured display label for the given variable key. */
+function label(key) { return varBy(key).label; }
+
+/**
+ * Derive the ZPL substitution token from a variable's current label.
+ * Rule: uppercase, spaces to underscores, strip non-alphanumeric, trim trailing underscores.
+ * Example: "Product Name" → "PRODUCT_NAME", used as ${PRODUCT_NAME} in ZPL templates.
+ * @param {string} key - Variable key (e.g. 'var1').
+ * @returns {string} Token string without the ${} wrapper.
+ */
+function token(key) { return label(key).toUpperCase().replace(/\s+/g,'_').replace(/[^A-Z0-9_]/g,'').replace(/_+$/g,''); }
+
+// ── Tabs ───────────────────────────────────────────────────────────────────────
+
+/**
+ * Switch the visible tab, update active tab button styling, and trigger any
+ * tab-specific initialisation (e.g. rendering lists that may have changed
+ * while the tab was hidden).
+ * @param {string} name - Tab identifier: 'print' | 'configure' | 'templates' | 'notes' | 'audit' | 'groups'
+ */
+function setTab(name) {
+  ['print','configure','templates','notes','audit','groups'].forEach(t => {
+    document.getElementById(`view-${t}`).classList.toggle('hidden', t !== name);
+    const btn = document.getElementById(`tab-${t}`);
+    btn.className = t === name
+      ? 'tab-btn px-4 py-3 text-sm font-medium border-b-2 -mb-px transition-colors border-blue-600 text-blue-600'
+      : 'tab-btn px-4 py-3 text-sm font-medium border-b-2 -mb-px transition-colors border-transparent text-gray-500 hover:text-gray-700';
+  });
+  if (name === 'configure') renderConfigure();
+  if (name === 'templates') { renderTemplates(); renderVarReference(); }
+  if (name === 'notes') document.getElementById('notes-input').value = S.notes || '';
+  if (name === 'audit') renderAuditLog();
+  if (name === 'groups') renderGroups();
+}
+
+/** Persist the notes textarea content to state on every keystroke. */
+function saveNotes() {
+  S.notes = document.getElementById('notes-input').value;
+  save();
+}
+
+// ── Settings ───────────────────────────────────────────────────────────────────
+
+/** Open the settings modal and populate fields from current state. */
+function openSettings() {
+  document.getElementById('settings-api-key').value            = S.settings.apiKey;
+  document.getElementById('settings-base-url').value           = S.settings.baseUrl;
+  // Default labelaryEnabled to true if the field is absent (old saves).
+  document.getElementById('settings-labelary-enabled').checked = S.settings.labelaryEnabled !== false;
+  document.getElementById('settings-modal').classList.remove('hidden');
+}
+
+/** Close the settings modal without saving. */
+function closeSettings() { document.getElementById('settings-modal').classList.add('hidden'); }
+
+/**
+ * Read settings fields, persist to state, reload printers, and re-apply the
+ * Labelary toggle (which may need to hide/show the Visual preview button).
+ */
+function saveSettings() {
+  S.settings.apiKey          = document.getElementById('settings-api-key').value.trim();
+  S.settings.baseUrl         = document.getElementById('settings-base-url').value.trim().replace(/\/$/, '');
+  S.settings.labelaryEnabled = document.getElementById('settings-labelary-enabled').checked;
+  save(); closeSettings(); loadPrinters();
+  applyLabelarySetting();
+}
+
+/**
+ * Export the full application state (settings, templates, variables, groups,
+ * notes, audit log) as a formatted JSON file for transfer to another machine.
+ * The audit log is placed last in the JSON for readability.
+ */
+function exportState() {
+  const { auditLog, ...rest } = S;
+  const ordered = { ...rest, auditLog };
+  const blob = new Blob([JSON.stringify(ordered, null, 2)], { type: 'application/json' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = 'fluics-print-studio-config.json';
+  a.click();
+  URL.revokeObjectURL(url);
+}
+
+/**
+ * Import a previously exported state file.
+ * The raw JSON is written to localStorage then reloaded through loadState() so
+ * all migrations are applied before the UI refreshes.
+ * @param {File} file - JSON file selected by the user.
+ */
+function importState(file) {
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = e => {
+    try {
+      const imported = JSON.parse(e.target.result);
+      localStorage.setItem('lr_state', JSON.stringify(imported));
+      S = loadState();
+      closeSettings();
+      setTab('print');
+      initPrintTab();
+      if (S.settings.apiKey) loadPrinters();
+    } catch {
+      alert('Could not read file — make sure it is a valid FLUICS PRINT Studio config.');
+    }
+  };
+  reader.readAsText(file);
+}
+
+// ── API ────────────────────────────────────────────────────────────────────────
+
+/**
+ * Authenticated fetch wrapper for the FLUICS Print API.
+ * Attaches the x-api-key header and parses the JSON response body.
+ * On non-2xx responses, extracts the human-readable message from the API error
+ * body (field paths: error.message for 4xx, details for 408 timeout) and
+ * attaches httpStatus to the thrown Error for caller-side handling.
+ *
+ * @param {string} path  - API path, e.g. '/get_printers_list' or '/{LID}/batchprint'.
+ * @param {object} opts  - fetch options (method, headers, body, …).
+ * @returns {Promise<object>} Parsed JSON response body.
+ * @throws {Error} With .httpStatus and .body set on API errors.
+ */
+async function apiFetch(path, opts = {}) {
+  if (!S.settings.apiKey) throw new Error('No API key — open Settings first');
+  const res = await fetch(`${S.settings.baseUrl}${path}`, {
+    ...opts,
+    headers: { 'x-api-key': S.settings.apiKey, ...(opts.headers || {}) }
+  });
+  let body;
+  try { body = await res.json(); } catch { body = null; }
+  if (!res.ok) {
+    const msg = body?.error?.message || body?.details || `${res.status} ${res.statusText}`;
+    const err = new Error(msg);
+    err.httpStatus = res.status;
+    err.body = body;
+    throw err;
+  }
+  return body;
+}
+
+// ── Printers ───────────────────────────────────────────────────────────────────
+
+/**
+ * Fetch the printer list from the API and populate the printer <select> in the
+ * Print tab and the Configure → Printers list.
+ * Restores the previously selected printer if it is still present in the list.
+ */
+async function loadPrinters() {
+  const sel = document.getElementById('printer-select');
+  sel.innerHTML = '<option>Loading…</option>';
+  try {
+    printers = await apiFetch('/get_printers_list');
+    sel.innerHTML = printers.length === 0
+      ? '<option value="">No printers found</option>'
+      : '<option value="">— select printer —</option>' +
+        printers.map(p => `<option value="${esc(p.LID)}">${esc(printerLabel(p))}</option>`).join('');
+    if (S.lastUsed.printer && printers.find(p => p.LID === S.lastUsed.printer))
+      sel.value = S.lastUsed.printer;
+    renderPrinters();
+  } catch (e) {
+    sel.innerHTML = '<option value="">Failed to load</option>';
+    setStatus(`Printer error: ${e.message}`, 'error');
+  }
+}
+
+// ── Print tab ──────────────────────────────────────────────────────────────────
+
+/**
+ * Initialise (or re-initialise) the Print tab.
+ * Called on startup, after importing state, and after template/variable changes
+ * so the dropdowns and inputs always reflect the current configuration.
+ */
+function initPrintTab() {
+  groupModeActive = S.lastUsed?.groupMode || false;
+  renderVarInputs();
+
+  // Sync date field label in case the user renamed it in Configure.
+  const dateLabelEl = document.getElementById('date-field-label');
+  if (dateLabelEl) dateLabelEl.textContent = label('date');
+
+  // Default to today's date, but restore the last-used date if available.
+  const savedDate = S.lastUsed.varInputs?.date;
+  document.getElementById('date-input').value =
+    savedDate || new Date().toISOString().split('T')[0];
+  updateDatePreview();
+
+  // Rebuild template dropdown and restore previous selection.
+  const ts = document.getElementById('template-select');
+  const prevTmpl = ts.value || S.lastUsed.template;
+  ts.innerHTML = '<option value="">— select template —</option>' +
+    S.templates.map(t => `<option value="${esc(t.id)}">${esc(t.name)}</option>`).join('');
+  if (prevTmpl) ts.value = prevTmpl;
+
+  refreshPreview();
+  syncGroupUI();
+}
+
+/**
+ * Build the variable input fields (text inputs or dropdowns depending on type)
+ * for all non-date variables and inject them into var-inputs-container.
+ * Restores last-used values from S.lastUsed.varInputs after rendering.
+ */
+function renderVarInputs() {
+  const VAR_KEYS = ['var1','var2','var3','counter'];
+  const html = VAR_KEYS.map(k => {
+    const v = varBy(k);
+    if (v.type === 'dropdown') {
+      const opts = (v.presets || []).map(p => `<option value="${esc(p)}">${esc(p)}</option>`).join('');
+      return `<div>
+        <label class="field-label">${esc(v.label)}</label>
+        <select id="var-input-${k}" onchange="refreshPreview()" class="field-input w-full">
+          <option value="">— select —</option>
+          ${opts}
+        </select>
+      </div>`;
+    }
+    const isCounter = k === 'counter';
+    if (isCounter) {
+      return `<div>
+        <label class="field-label">${esc(v.label)}</label>
+        <input id="var-input-${k}" type="number" min="1" max="9999"
+               class="field-input w-full" oninput="refreshPreview()">
+      </div>`;
+    }
+    return `<div>
+      <label class="field-label">${esc(v.label)}</label>
+      <div class="relative">
+        <input id="var-input-${k}" type="text" class="field-input w-full" style="padding-right:2.25rem" oninput="refreshPreview()">
+        <button type="button" onclick="openScanner('var-input-${k}')" title="Scan barcode or QR code"
+                class="absolute right-2 top-1/2 -translate-y-1/2 text-gray-400 hover:text-blue-500 transition-colors">
+          ${scannerCameraIcon()}
+        </button>
+      </div>
+    </div>`;
+  }).join('');
+
+  document.getElementById('var-inputs-container').innerHTML = html;
+
+  // Render user input next to the date field.
+  const userV = varBy('user');
+  let userHtml;
+  if (userV.type === 'dropdown') {
+    const opts = (userV.presets || []).map(p => `<option value="${esc(p)}">${esc(p)}</option>`).join('');
+    userHtml = `<label class="field-label">${esc(userV.label)}</label>
+      <select id="var-input-user" onchange="refreshPreview()" class="field-input w-full">
+        <option value="">— select —</option>
+        ${opts}
+      </select>`;
+  } else {
+    userHtml = `<label class="field-label">${esc(userV.label)}</label>
+      <div class="relative">
+        <input id="var-input-user" type="text" class="field-input w-full" style="padding-right:2.25rem" oninput="refreshPreview()">
+        <button type="button" onclick="openScanner('var-input-user')" title="Scan barcode or QR code"
+                class="absolute right-2 top-1/2 -translate-y-1/2 text-gray-400 hover:text-blue-500 transition-colors">
+          ${scannerCameraIcon()}
+        </button>
+      </div>`;
+  }
+  document.getElementById('user-input-container').innerHTML = userHtml;
+
+  // Restore persisted values after render (works for both <input> and <select>).
+  ['user', ...VAR_KEYS].forEach(k => {
+    const el = document.getElementById(`var-input-${k}`);
+    const last = S.lastUsed.varInputs?.[k];
+    if (el && last) el.value = last;
+  });
+}
+
+/**
+ * Read the current value of a variable input by key.
+ * @param {string} key - Variable key (e.g. 'user', 'var1').
+ * @returns {string} Trimmed input value, or '' if the element is not found.
+ */
+function getVarValue(key) {
+  return document.getElementById(`var-input-${key}`)?.value?.trim() || '';
+}
+
+/**
+ * Build the array of substitution maps — one entry per label to be printed.
+ * The counter variable drives repetition: if counter = 5, five identical label
+ * records are produced with counter values "1" through "5".
+ * Each record is a flat object mapping ZPL token strings to their values,
+ * e.g. { "PRODUCT_NAME": "Reagent A", "SAMPLE_": "1", "DATE": "21Apr26", … }
+ * In group mode, delegates to buildGroupLabels() instead.
+ * @returns {object[]} Array of token→value maps, empty if counter is 0 or unset.
+ */
+function buildLabels() {
+  if (groupModeActive) return buildGroupLabels();
+  const counterRaw = parseInt(document.getElementById('var-input-counter')?.value) || 0;
+  if (counterRaw <= 0) return [];
+
+  const dateRaw = document.getElementById('date-input').value;
+  const date = formatDate(dateRaw, varBy('date').format || 'YYYY-MM-DD');
+  const labels = [];
+
+  for (let i = 1; i <= counterRaw; i++) {
+    const vars = {};
+    vars[token('user')]    = getVarValue('user');
+    vars[token('date')]    = date;
+    vars[token('var1')]    = getVarValue('var1');
+    vars[token('var2')]    = getVarValue('var2');
+    vars[token('var3')]    = getVarValue('var3');
+    vars[token('counter')] = String(i);
+    labels.push(vars);
+  }
+  return labels;
+}
+
+/** Build labels for all rows in the active product's group label set. */
+function buildGroupLabels() {
+  const product = getVarValue('var1');
+  const group   = S.groups.find(f => f.products.includes(product));
+  if (!group) return [];
+  const dateRaw = document.getElementById('date-input').value;
+  const date    = formatDate(dateRaw, varBy('date').format || 'YYYY-MM-DD');
+  const labels  = [];
+  for (const row of group.labelSet) {
+    const count = parseInt(row.count) || 0;
+    for (let i = 1; i <= count; i++) {
+      const vars = {};
+      vars[token('user')]    = getVarValue('user');
+      vars[token('date')]    = date;
+      vars[token('var1')]    = product;
+      vars[token('var2')]    = getVarValue('var2');
+      vars[token('var3')]    = row.test;
+      vars[token('counter')] = String(i);
+      labels.push(vars);
+    }
+  }
+  return labels;
+}
+
+/**
+ * Perform ${TOKEN} substitution on a ZPL template string.
+ * Unrecognised tokens are replaced with an empty string rather than left as-is,
+ * so the printer never receives a literal "${…}" on the label.
+ * @param {string} zpl  - Raw ZPL template containing ${TOKEN} placeholders.
+ * @param {object} vars - Token→value map produced by buildLabels().
+ * @returns {string} ZPL with all placeholders replaced.
+ */
+function subst(zpl, vars) {
+  return zpl.replace(/\$\{(\w+)\}/g, (_, k) => vars[k] ?? '');
+}
+
+/**
+ * Rebuild the label preview table and persist all current form values.
+ * Called on every input change. Also triggers a debounced Labelary render
+ * when visual preview mode is active.
+ */
+function refreshPreview() {
+  // Snapshot every input value into lastUsed so they survive a page reload.
+  if (!S.lastUsed.varInputs) S.lastUsed.varInputs = {};
+  ['user','var1','var2','var3','counter'].forEach(k => {
+    const el = document.getElementById(`var-input-${k}`);
+    if (el) S.lastUsed.varInputs[k] = el.value;
+  });
+  const dateEl = document.getElementById('date-input');
+  if (dateEl?.value) S.lastUsed.varInputs['date'] = dateEl.value;
+  const tmplEl = document.getElementById('template-select');
+  if (tmplEl?.value) S.lastUsed.template = tmplEl.value;
+  save();
+  updateGroupToggle();
+
+  const labels = buildLabels();
+  const count = labels.length;
+  document.getElementById('label-count').textContent = `${count} label${count !== 1 ? 's' : ''}`;
+  const tbody = document.getElementById('preview-body');
+
+  if (count === 0) {
+    document.getElementById('preview-head-row').innerHTML = '<th class="th">#</th>';
+    tbody.innerHTML = '<tr><td colspan="8" class="px-3 py-5 text-center text-gray-400 italic text-sm">Fill in the form above to preview labels</td></tr>';
+    document.getElementById('preview-warning')?.classList.add('hidden');
+    return;
+  }
+
+  // Only show columns for variables that have a value in at least one label.
+  const allKeys = ['user','date','var1','var2','var3','counter'];
+  const usedKeys = allKeys.filter(k => labels.some(l => l[token(k)]));
+  document.getElementById('preview-head-row').innerHTML =
+    '<th class="th">#</th>' + usedKeys.map(k => `<th class="th">${esc(label(k))}</th>`).join('');
+
+  // Warn if the selected template has placeholders with no matching input value.
+  const warnEl = document.getElementById('preview-warning');
+  const tmplNow = S.templates.find(t => t.id === document.getElementById('template-select')?.value);
+  if (warnEl) {
+    if (tmplNow) {
+      const placeholders = [...new Set([...tmplNow.zpl.matchAll(/\$\{(\w+)\}/g)].map(m => m[1]))];
+      const missing = placeholders.filter(p => !labels[0][p]);
+      if (missing.length) {
+        warnEl.textContent = `⚠ Template placeholder${missing.length > 1 ? 's' : ''} not filled: ${missing.map(p => '${'+p+'}').join(', ')}`;
+        warnEl.classList.remove('hidden');
+      } else {
+        warnEl.classList.add('hidden');
+      }
+    } else {
+      warnEl.classList.add('hidden');
+    }
+  }
+
+  // The API accepts at most 100 labels per request; batches larger than that
+  // are split automatically in printLabels() and a warning is shown here.
+  const warn = count > 100 ? `<tr><td colspan="${usedKeys.length+1}" class="px-3 py-2 text-center text-amber-600 text-xs bg-amber-50">⚠ More than 100 labels — will be sent in chunks of 100</td></tr>` : '';
+  tbody.innerHTML = warn + labels.map((l, i) =>
+    `<tr class="${i % 2 ? 'bg-gray-50' : ''}">
+      <td class="px-3 py-1.5 text-gray-400">${i+1}</td>
+      ${usedKeys.map(k => `<td class="px-3 py-1.5">${esc(l[token(k)]) || dash()}</td>`).join('')}
+    </tr>`
+  ).join('');
+  scheduleLabelaryRender();
+}
+
+/**
+ * Send all generated labels to the selected printer via the FLUICS Print API.
+ * Labels are split into chunks of 100 (API limit) and sent sequentially.
+ * Writes an audit log entry on both success and failure.
+ */
+async function printLabels() {
+  const labels = buildLabels();
+  if (!labels.length) return setStatus('No labels to print.', 'error');
+  const lid = document.getElementById('printer-select').value;
+  if (!lid) return setStatus('Select a printer.', 'error');
+  const tmpl = S.templates.find(t => t.id === document.getElementById('template-select').value);
+  if (!tmpl) return setStatus('Select a template.', 'error');
+
+  const btn = document.getElementById('print-btn');
+  btn.disabled = true;
+  setStatus('Sending…', 'info');
+
+  // Persist selections so they survive a reload even if the print fails.
+  S.lastUsed.printer  = lid;
+  S.lastUsed.template = document.getElementById('template-select').value;
+  if (!S.lastUsed.varInputs) S.lastUsed.varInputs = {};
+  ['user','var1','var2','var3','counter'].forEach(k => {
+    const el = document.getElementById(`var-input-${k}`);
+    if (el) S.lastUsed.varInputs[k] = el.value;
+  });
+  save();
+
+  try {
+    // Build the payload: substitute variables into the ZPL template for each label.
+    // Note: the FLUICS API does NOT want ^XA/^XZ wrappers — it adds them itself.
+    const payload = labels.map(l => ({ id: uid(), data: subst(tmpl.zpl, l) }));
+    for (let i = 0; i < payload.length; i += 100) {
+      await apiFetch(`/${lid}/batchprint`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload.slice(i, i + 100))
+      });
+    }
+    const auditName = groupModeActive
+      ? `${tmpl.name} [Group: ${S.groups.find(f => f.products.includes(getVarValue('var1')))?.name || ''}]`
+      : tmpl.name;
+    setStatus(`✓ ${labels.length} label${labels.length !== 1 ? 's' : ''} sent successfully`, 'success');
+    addAuditEntry({ status: 'success', count: labels.length, lid, tmplName: auditName, zpl: payload.map(p => p.data) });
+  } catch (e) {
+    // Map known HTTP status codes to user-friendly messages.
+    const msg = e.httpStatus === 408
+      ? `Printer did not respond in time — device may be offline (${e.message})`
+      : e.httpStatus === 403 ? `Access denied — check your API key`
+      : e.httpStatus === 404 ? `Printer not found — it may no longer be linked to your API key`
+      : `Print failed: ${e.message}`;
+    setStatus(msg, 'error');
+    addAuditEntry({ status: 'error', count: labels.length, lid, tmplName: auditName, zpl: payload.map(p => p.data), error: msg });
+  } finally {
+    btn.disabled = false;
+  }
+}
+
+/** Update the small "Prints as: …" hint below the date picker. */
+function updateDatePreview() {
+  const el = document.getElementById('date-format-preview');
+  if (!el) return;
+  const val = document.getElementById('date-input')?.value;
+  const fmt = varBy('date').format || 'YYYY-MM-DD';
+  el.textContent = val ? `Prints as: ${formatDate(val, fmt)}` : '';
+}
+
+// ── Labelary visual preview ────────────────────────────────────────────────────
+//
+// Labelary (https://labelary.com) is a third-party ZPL rendering service.
+// It accepts a full ZPL document (WITH ^XA/^XZ) via HTTP POST and returns a PNG.
+// Unlike the FLUICS Print API, Labelary REQUIRES the ^XA/^XZ wrappers.
+//
+// Privacy note: enabling this feature sends your ZPL label content to Labelary's
+// servers. It can be disabled in Settings.
+
+/** Index of the label currently displayed in visual preview mode. */
+let labelaryIndex = 0;
+
+/** Timer handle for the debounced render; prevents a request per keystroke. */
+let labelaryDebounceTimer = null;
+
+/** Current preview mode: 'table' | 'visual'. */
+let previewMode = 'table';
+
+/**
+ * Switch between Table and Visual preview modes.
+ * Triggers an immediate Labelary render when switching to visual.
+ * @param {string} mode - 'table' or 'visual'.
+ */
+function setPreviewMode(mode) {
+  previewMode = mode;
+  document.getElementById('preview-table-pane').classList.toggle('hidden', mode !== 'table');
+  document.getElementById('preview-visual-pane').classList.toggle('hidden', mode !== 'visual');
+  document.getElementById('preview-tab-table').className  = mode === 'table'
+    ? 'px-2.5 py-1 bg-blue-600 text-white'
+    : 'px-2.5 py-1 text-gray-500 hover:bg-gray-50';
+  document.getElementById('preview-tab-visual').className = mode === 'visual'
+    ? 'px-2.5 py-1 bg-blue-600 text-white'
+    : 'px-2.5 py-1 text-gray-500 hover:bg-gray-50';
+  if (mode === 'visual') renderLabelaryPreview();
+}
+
+/**
+ * Move through the label list in visual preview mode.
+ * @param {number} delta - +1 for next label, -1 for previous.
+ */
+function labelaryNav(delta) {
+  const labels = buildLabels();
+  labelaryIndex = Math.max(0, Math.min(labels.length - 1, labelaryIndex + delta));
+  renderLabelaryPreview();
+}
+
+/**
+ * In-memory cache mapping ZPL strings to blob: URLs of their rendered PNG.
+ * Keyed by the full substituted ZPL (including ^XA/^XZ) so identical labels
+ * across navigation are served instantly without a repeat API call.
+ * Cleared whenever any form input changes to ensure stale images are not shown.
+ */
+const labelaryCache = new Map();
+
+/**
+ * Revoke all cached blob URLs and empty the cache.
+ * Must be called when label content changes to avoid memory leaks from
+ * unreleased blob URLs.
+ */
+function clearLabelaryCache() {
+  labelaryCache.forEach(url => URL.revokeObjectURL(url));
+  labelaryCache.clear();
+}
+
+/**
+ * Fetch and display the PNG render of the currently indexed label from Labelary.
+ * - Serves from cache if available (instant, no network request).
+ * - Keeps the existing image visible while a new fetch is in progress so the
+ *   display does not flicker on navigation.
+ * - Updates navigation controls (Prev/Next disabled state, "N / total" counter).
+ */
+async function renderLabelaryPreview() {
+  const labels = buildLabels();
+  const container = document.getElementById('labelary-container');
+  const navInfo   = document.getElementById('lbl-nav-info');
+  if (!container) return;
+
+  if (!labels.length) {
+    container.innerHTML = '<span class="text-gray-400 italic text-sm">No labels — fill in the form above</span>';
+    if (navInfo) navInfo.textContent = '—';
+    return;
+  }
+
+  const tmpl = S.templates.find(t => t.id === document.getElementById('template-select')?.value);
+  if (!tmpl) {
+    container.innerHTML = '<span class="text-gray-400 italic text-sm">Select a template to preview</span>';
+    return;
+  }
+
+  labelaryIndex = Math.max(0, Math.min(labels.length - 1, labelaryIndex));
+  if (navInfo) navInfo.textContent = `${labelaryIndex + 1} / ${labels.length}`;
+  document.getElementById('lbl-prev').disabled = labelaryIndex === 0;
+  document.getElementById('lbl-next').disabled = labelaryIndex >= labels.length - 1;
+
+  // Labelary requires the full ZPL document including ^XA/^XZ wrappers.
+  const zpl = `^XA${subst(tmpl.zpl, labels[labelaryIndex])}^XZ`;
+
+  if (labelaryCache.has(zpl)) {
+    // Cache hit — update src in place to avoid a DOM replacement flicker.
+    const img = container.querySelector('img');
+    if (img) { img.src = labelaryCache.get(zpl); }
+    else { container.innerHTML = `<img src="${labelaryCache.get(zpl)}" alt="Label preview" class="max-w-full rounded shadow-sm border border-gray-200" style="image-rendering:crisp-edges">`; }
+    return;
+  }
+
+  // Show "Rendering…" only if there is no image yet; otherwise keep the old
+  // image visible so the user has context while waiting.
+  if (!container.querySelector('img')) {
+    container.innerHTML = '<span class="text-gray-400 text-sm">Rendering…</span>';
+  }
+
+  const labelWidth  = tmpl.labelWidth  || 1;
+  const labelHeight = tmpl.labelHeight || 0.5;
+  const labelDpmm   = tmpl.labelDpmm   || 12;
+  const url = `https://api.labelary.com/v1/printers/${labelDpmm}dpmm/labels/${labelWidth}x${labelHeight}/0/`;
+
+  try {
+    const res = await fetch(url, {
+      method: 'POST',
+      headers: { 'Accept': 'image/png', 'Content-Type': 'application/x-www-form-urlencoded' },
+      body: zpl
+    });
+    if (!res.ok) throw new Error(`${res.status} ${res.statusText}`);
+    const blob = await res.blob();
+    const imgUrl = URL.createObjectURL(blob);
+    labelaryCache.set(zpl, imgUrl);
+    const img = container.querySelector('img');
+    if (img) { img.src = imgUrl; }
+    else { container.innerHTML = `<img src="${imgUrl}" alt="Label preview" class="max-w-full rounded shadow-sm border border-gray-200" style="image-rendering:crisp-edges">`; }
+  } catch (e) {
+    container.innerHTML = `<span class="text-red-500 text-sm">Render failed: ${esc(e.message)}</span>`;
+  }
+}
+
+/**
+ * Show or hide the Visual tab button based on the labelaryEnabled setting.
+ * If the feature is turned off while in visual mode, falls back to table mode.
+ */
+function applyLabelarySetting() {
+  const enabled = S.settings.labelaryEnabled !== false;
+  const btn = document.getElementById('preview-tab-visual');
+  if (btn) btn.style.display = enabled ? '' : 'none';
+  if (!enabled && previewMode === 'visual') setPreviewMode('table');
+}
+
+/**
+ * Schedule a Labelary render 700 ms after the last input change.
+ * Debounced to avoid hammering the Labelary API (free tier: 3 req/s).
+ * Clears the image cache first so stale renders from before the change are
+ * not shown when the new render arrives.
+ * No-op when not in visual preview mode.
+ */
+function scheduleLabelaryRender() {
+  if (previewMode !== 'visual') return;
+  clearLabelaryCache();
+  clearTimeout(labelaryDebounceTimer);
+  labelaryDebounceTimer = setTimeout(renderLabelaryPreview, 700);
+}
+
+/**
+ * Display a feedback message below the Print button.
+ * Uses inline styles rather than Tailwind classes because dynamically-set
+ * class names are not always picked up by the Tailwind CDN scanner.
+ * @param {string} msg  - Message to show, or '' to hide.
+ * @param {string} type - 'error' | 'success' | 'info'
+ */
+function setStatus(msg, type) {
+  const el = document.getElementById('print-status');
+  if (!msg) { el.style.display = 'none'; return; }
+  el.textContent = msg;
+  el.style.cssText = {
+    error:   'display:block;padding:.5rem .75rem;border-radius:.375rem;font-size:.875rem;background:#fef2f2;color:#b91c1c;border:1px solid #fecaca',
+    success: 'display:block;padding:.5rem .75rem;border-radius:.375rem;font-size:.875rem;background:#f0fdf4;color:#15803d;border:1px solid #bbf7d0',
+    info:    'display:block;padding:.5rem .75rem;border-radius:.375rem;font-size:.875rem;background:#f9fafb;color:#6b7280;border:1px solid #e5e7eb',
+  }[type] || 'display:block';
+}
+
+// ── Configure tab ──────────────────────────────────────────────────────────────
+
+/**
+ * Return the display label for a printer object.
+ * Uses the custom name from S.printerNames if set, otherwise falls back to
+ * the API-provided serviceName with optional comment appended.
+ * @param {object} p - Printer object from the API { LID, serviceName, comment }.
+ * @returns {string}
+ */
+function printerLabel(p) {
+  const custom = S.printerNames?.[p.LID];
+  return custom || p.serviceName + (p.comment ? ' · ' + p.comment : '');
+}
+
+/**
+ * Render the printer list in the Configure tab.
+ * Each row shows the current display name and an input to override it.
+ */
+function renderPrinters() {
+  const el = document.getElementById('printers-list');
+  if (!el) return;
+  if (!printers.length) {
+    el.innerHTML = empty('No printers loaded — use the Refresh button or load from the Print tab.');
+    return;
+  }
+  el.innerHTML = printers.map(p => {
+    const custom = S.printerNames?.[p.LID] || '';
+    const sub = p.comment ? p.serviceName + ' · ' + p.comment : p.serviceName;
+    return `<div class="list-row gap-3">
+      <div class="min-w-0 flex-1">
+        <div class="text-sm font-medium">${esc(custom || p.serviceName)}</div>
+        <div class="text-xs text-gray-400 truncate">${esc(sub)}</div>
+      </div>
+      <input type="text" value="${esc(custom)}" placeholder="${esc(p.serviceName)}"
+             data-lid="${esc(p.LID)}"
+             oninput="setPrinterName('${esc(p.LID)}', this.value)"
+             class="field-input w-48 text-sm">
+    </div>`;
+  }).join('');
+}
+
+/**
+ * Persist a custom printer display name and update all live references
+ * (the Configure list row and the Print tab dropdown) without a full re-render.
+ * @param {string} lid   - Printer LID from the API.
+ * @param {string} value - New custom name (empty string resets to API name).
+ */
+function setPrinterName(lid, value) {
+  if (!S.printerNames) S.printerNames = {};
+  S.printerNames[lid] = value.trim();
+  save();
+  // Update the displayed name in the Configure list without re-rendering the whole list.
+  const inp = document.querySelector(`#printers-list input[data-lid="${lid}"]`);
+  const nameEl = inp?.closest('.list-row')?.querySelector('.text-sm.font-medium');
+  const p = printers.find(x => x.LID === lid);
+  if (nameEl && p) nameEl.textContent = value.trim() || p.serviceName;
+  // Keep the Print tab printer dropdown in sync.
+  const sel = document.getElementById('printer-select');
+  if (sel && p) {
+    const opt = [...sel.options].find(o => o.value === lid);
+    if (opt) opt.textContent = printerLabel(p);
+  }
+}
+
+/** Render all Configure tab sections. */
+function renderConfigure() {
+  renderVariables();
+  renderPrinters();
+}
+
+// ── Variables ──────────────────────────────────────────────────────────────────
+
+/** Human-readable labels for the two user-configurable variable types. */
+const TYPE_LABELS = { free: 'Free text', dropdown: 'Dropdown' };
+
+/**
+ * Render the Variables section of the Configure tab.
+ * Each variable row shows: role label | live ZPL token | editable name | type controls.
+ * For the date variable the type control is replaced by a date-format selector.
+ * For dropdown variables an additional textarea for preset values is shown.
+ * Changes are not saved until the user clicks the Save button (saveVariables).
+ */
+function renderVariables() {
+  document.getElementById('variables-table').innerHTML =
+    `<div class="space-y-2">` +
+    ROLES.map(r => {
+      const v = varBy(r.key);
+      const isSpecial = r.key === 'date';
+
+      const typeDisplay = isSpecial
+        ? `<select data-format-key="date" class="field-input text-xs" style="padding:0.25rem 0.5rem">
+            ${DATE_FORMATS.map(f => `<option value="${f.id}" ${(v.format||'YYYY-MM-DD')===f.id?'selected':''}>${f.label}</option>`).join('')}
+           </select>`
+        : ['free','dropdown'].map(t =>
+            `<label class="flex items-center gap-1 cursor-pointer select-none">
+              <input type="radio" name="vtype-${r.key}" value="${t}" ${v.type===t?'checked':''} onchange="onTypeChange('${r.key}','${t}')" class="cursor-pointer">
+              <span class="text-xs text-gray-500">${TYPE_LABELS[t]}</span>
+            </label>`
+          ).join('');
+
+      const presetsHtml = (!isSpecial && v.type === 'dropdown') ? `
+        <div style="padding-left:7.25rem" class="border-t border-gray-100 pt-2 mt-1">
+          <label class="field-label">Values <span class="font-normal normal-case text-gray-400">(one per line — paste to bulk add)</span></label>
+          <textarea data-presets-key="${r.key}" rows="4"
+            class="field-input w-full text-sm font-mono resize-y"
+            placeholder="Value 1&#10;Value 2&#10;Value 3"
+            onfocus="this.style.borderColor='#3b82f6';this.style.boxShadow='0 0 0 2px rgba(59,130,246,0.2)'"
+            onblur="this.style.borderColor='';this.style.boxShadow=''"
+            >${esc((v.presets||[]).join('\n'))}</textarea>
+        </div>` : '';
+
+      return `<div class="border border-gray-100 rounded-lg p-3 space-y-2">
+        <div class="flex items-center gap-3">
+          <span class="text-xs text-gray-400 w-20 shrink-0">${r.role}</span>
+          <code class="text-xs text-gray-400 bg-gray-100 px-2 py-1 rounded font-mono shrink-0" style="width:22ch">\${${token(r.key)}}</code>
+          <input data-key="${r.key}" type="text" value="${esc(v.label)}" class="field-input flex-1 text-sm">
+        </div>
+        <div class="flex items-center gap-4 pl-[7.25rem]">${typeDisplay}</div>
+        ${presetsHtml}
+      </div>`;
+    }).join('') +
+    `</div>`;
+}
+
+/**
+ * Read all variable configuration fields from the DOM and persist to state.
+ * Triggers a re-render of the Configure tab, the template variable reference
+ * chip list, and the Print tab inputs (labels may have changed).
+ */
+function saveVariables() {
+  document.querySelectorAll('#variables-table input[data-key]').forEach(inp => {
+    const v = S.variables.find(x => x.key === inp.dataset.key);
+    if (v) v.label = inp.value.trim() || v.label;
+  });
+  document.querySelectorAll('#variables-table textarea[data-presets-key]').forEach(ta => {
+    const v = S.variables.find(x => x.key === ta.dataset.presetsKey);
+    if (v) v.presets = ta.value.split('\n').map(s => s.trim()).filter(Boolean);
+  });
+  document.querySelectorAll('#variables-table select[data-format-key]').forEach(sel => {
+    const v = S.variables.find(x => x.key === sel.dataset.formatKey);
+    if (v) v.format = sel.value;
+  });
+  save(); syncGroupData(); renderVariables(); renderVarReference(); initPrintTab(); renderGroups();
+}
+
+/**
+ * Immediately persist a type change (free ↔ dropdown) and re-render.
+ * Called by the radio button onchange handler; does not wait for Save.
+ * @param {string} key     - Variable key.
+ * @param {string} newType - 'free' or 'dropdown'.
+ */
+function onTypeChange(key, newType) {
+  const v = S.variables.find(x => x.key === key);
+  if (!v) return;
+  v.type = newType;
+  if (!Array.isArray(v.presets)) v.presets = [];
+  save(); syncGroupData(); renderVariables(); initPrintTab(); renderGroups();
+}
+
+// ── Templates tab ──────────────────────────────────────────────────────────────
+
+/**
+ * Render all saved templates as cards with a read-only ZPL preview.
+ * Each card shows the template name, label dimensions, and Edit/Delete buttons.
+ */
+function renderTemplates() {
+  const el = document.getElementById('templates-list');
+  if (!S.templates.length) { el.innerHTML = empty('No templates added yet'); return; }
+  el.innerHTML = S.templates.map(t =>
+    `<div class="border border-gray-200 rounded-lg p-4">
+      <div class="flex items-center justify-between mb-2">
+        <div>
+          <span class="text-sm font-medium">${esc(t.name)}</span>
+          <span class="ml-2 text-xs text-gray-400">${t.labelWidth||1}" × ${t.labelHeight||0.5}" · ${t.labelDpmm==12?'300':t.labelDpmm==6?'152':'203'} dpi</span>
+        </div>
+        <div class="flex gap-3">
+          <button onclick="openEditTemplate('${t.id}')" class="text-xs text-blue-600 hover:underline">Edit</button>
+          <button onclick="deleteTemplate('${t.id}')" class="text-xs text-red-500 hover:underline">Delete</button>
+        </div>
+      </div>
+      <textarea class="zpl-editor w-full h-20 text-xs border border-gray-200 rounded p-2 bg-gray-50 resize-none" readonly>${esc(t.zpl)}</textarea>
+    </div>`
+  ).join('');
+}
+
+/**
+ * Render the variable reference chip strip at the top of the Templates tab.
+ * Shows each variable's current token and label so users know what ${…}
+ * placeholders are available when writing ZPL templates.
+ */
+function renderVarReference() {
+  const el = document.getElementById('var-reference');
+  if (!el) return;
+  const chips = S.variables.map(v =>
+    `<code class="bg-blue-100 px-1 py-0.5 rounded">\${${token(v.key)}}</code><span class="text-blue-500 ml-1">${esc(v.label)}</span>`
+  ).join('<span class="mx-1.5 text-blue-300">·</span>');
+  el.innerHTML = `<strong class="font-semibold">Variables:</strong> <span class="ml-1">${chips}</span>
+    <p class="mt-1.5 text-blue-600">Do not include <code>^XA</code> or <code>^XZ</code> wrappers — the API adds these.</p>`;
+}
+
+/** Open the Add Template modal with blank fields. */
+function openAddTemplate() {
+  editingId = null; showModal('Add Template', tmplBody()); modalAction = saveTemplate;
+  // No initial ZPL to preview yet; preview will render once the user starts typing.
+}
+
+/** Open the Edit Template modal pre-populated with the given template's data. */
+function openEditTemplate(id) {
+  editingId = id; showModal('Edit Template', tmplBody(S.templates.find(t => t.id === id))); modalAction = saveTemplate;
+  // Trigger an immediate preview for the existing ZPL (only when Labelary is enabled).
+  if (S.settings.labelaryEnabled !== false) setTimeout(renderTmplModalPreview, 80);
+}
+
+/**
+ * Build the HTML body for the Add/Edit Template modal.
+ * Includes name, label dimensions (width, height, dpi — used by Labelary preview),
+ * and the ZPL code textarea.
+ * @param {object} [t] - Existing template object for pre-fill, or undefined for a new template.
+ * @returns {string} HTML string injected into the modal body.
+ */
+function tmplBody(t) {
+  const withPreview = S.settings.labelaryEnabled !== false;
+  const gridStyle = withPreview
+    ? 'display:grid;grid-template-columns:1fr 220px;gap:1.25rem;align-items:start'
+    : '';
+  const zplEvents = withPreview ? 'oninput="scheduleTmplPreview()"' : '';
+  const dimEvents = withPreview ? 'oninput="scheduleTmplPreview()"' : '';
+  const dpiEvent  = withPreview ? 'onchange="scheduleTmplPreview()"' : '';
+  return `
+    <div style="${gridStyle}">
+      <div class="space-y-4">
+        <div>
+          <label class="field-label">Template Name</label>
+          <input id="m-tname2" type="text" value="${esc(t?.name||'')}" placeholder="e.g. Standard 50×25mm" class="field-input w-full">
+        </div>
+        <div class="grid grid-cols-3 gap-2">
+          <div>
+            <label class="field-label">Width (in)</label>
+            <input id="m-tlbl-width" type="number" step="0.1" min="0.5" max="12" value="${t?.labelWidth||1}" class="field-input w-full" ${dimEvents}>
+          </div>
+          <div>
+            <label class="field-label">Height (in)</label>
+            <input id="m-tlbl-height" type="number" step="0.1" min="0.5" max="12" value="${t?.labelHeight||0.5}" class="field-input w-full" ${dimEvents}>
+          </div>
+          <div>
+            <label class="field-label">Resolution</label>
+            <select id="m-tlbl-dpmm" class="field-input w-full" ${dpiEvent}>
+              <option value="8" ${t?.labelDpmm==8?'selected':''}>203 dpi</option>
+              <option value="12" ${(t?.labelDpmm||12)==12?'selected':''}>300 dpi</option>
+              <option value="6" ${t?.labelDpmm==6?'selected':''}>152 dpi</option>
+            </select>
+          </div>
+        </div>
+        <div>
+          <label class="field-label">ZPL Code</label>
+          <textarea id="m-tzpl" class="zpl-editor w-full h-44 border border-gray-300 rounded px-3 py-2 resize-y"
+            style="outline:none"
+            onfocus="this.style.boxShadow='0 0 0 2px rgba(59,130,246,0.2)';this.style.borderColor='#3b82f6'"
+            onblur="this.style.boxShadow='';this.style.borderColor=''"
+            ${zplEvents}
+            placeholder="^MTT^PW300...">${esc(t?.zpl||'')}</textarea>
+        </div>
+      </div>
+      ${withPreview ? `
+      <div>
+        <label class="field-label">Preview</label>
+        <div id="m-label-preview" style="background:#f3f4f6;border-radius:.375rem;min-height:120px;display:flex;align-items:center;justify-content:center;padding:.75rem;font-size:.75rem;color:#9ca3af;font-style:italic;border:1px solid #e5e7eb">
+          Rendering…
+        </div>
+        <button type="button" onclick="renderTmplModalPreview()" class="btn-secondary text-xs w-full mt-2">↻ Refresh</button>
+        <p class="text-xs text-gray-400 mt-1.5 leading-tight">Tokens shown as placeholders</p>
+      </div>` : ''}
+    </div>`;
+}
+
+/** Read the template modal fields and create or update the template in state. */
+function saveTemplate() {
+  const name      = document.getElementById('m-tname2').value.trim();
+  const zpl       = document.getElementById('m-tzpl').value;
+  const labelWidth  = parseFloat(document.getElementById('m-tlbl-width').value)  || 1;
+  const labelHeight = parseFloat(document.getElementById('m-tlbl-height').value) || 0.5;
+  const labelDpmm   = parseInt(document.getElementById('m-tlbl-dpmm').value)     || 12;
+  if (!name) return;
+  if (editingId) {
+    Object.assign(S.templates.find(t => t.id === editingId), { name, zpl, labelWidth, labelHeight, labelDpmm });
+  } else {
+    S.templates.push({ id: uid(), name, zpl, labelWidth, labelHeight, labelDpmm });
+  }
+  save(); closeModal(); renderTemplates(); initPrintTab();
+}
+
+/** Delete a template after confirmation. Re-initialises the Print tab dropdown. */
+function deleteTemplate(id) {
+  if (!confirm('Delete this template?')) return;
+  S.templates = S.templates.filter(t => t.id !== id);
+  save(); renderTemplates(); initPrintTab();
+}
+
+// ── Modal ──────────────────────────────────────────────────────────────────────
+
+/**
+ * Open the generic modal with a title and arbitrary HTML body content.
+ * Sets modalAction so the Save button routes to the correct handler.
+ * Auto-focuses the first input or textarea after a short delay (needed because
+ * the element must be in the DOM before focus() works).
+ * @param {string} title - Modal heading.
+ * @param {string} body  - HTML string to inject into the modal body.
+ */
+function showModal(title, body) {
+  document.getElementById('modal-title').textContent = title;
+  document.getElementById('modal-body').innerHTML = body;
+  document.getElementById('modal').classList.remove('hidden');
+  setTimeout(() => document.querySelector('#modal input, #modal textarea')?.focus(), 40);
+}
+
+/** Close the modal and reset shared state used by the modal save handler. */
+function closeModal() {
+  clearTimeout(tmplPreviewTimer);
+  document.getElementById('modal').classList.add('hidden');
+  modalAction = null; editingId = null;
+}
+
+/** Called by the modal Save button; delegates to whichever action opened the modal. */
+function modalSave() { if (modalAction) modalAction(); }
+
+// ── Template modal Labelary preview ───────────────────────────────────────────
+
+/** Debounce timer for the template-editor Labelary preview (separate from main preview timer). */
+let tmplPreviewTimer = null;
+
+/**
+ * Schedule a debounced Labelary render for the template editor modal.
+ * Called on every keystroke in the ZPL textarea and on dimension/dpi changes.
+ * No-op when Labelary is disabled in Settings.
+ */
+function scheduleTmplPreview() {
+  if (S.settings.labelaryEnabled === false) return;
+  clearTimeout(tmplPreviewTimer);
+  tmplPreviewTimer = setTimeout(renderTmplModalPreview, 700);
+}
+
+/**
+ * Render a Labelary preview inside the template editor modal.
+ * Reads ZPL, width, height, and dpmm from the modal form fields.
+ * Token placeholders (${TOKEN}) are sent as-is so the layout is visible.
+ * Wraps ZPL in ^XA/^XZ as required by the Labelary API.
+ */
+async function renderTmplModalPreview() {
+  const container = document.getElementById('m-label-preview');
+  if (!container) return;
+
+  const rawZpl  = (document.getElementById('m-tzpl')?.value || '').trim();
+  const w       = parseFloat(document.getElementById('m-tlbl-width')?.value)  || 1;
+  const h       = parseFloat(document.getElementById('m-tlbl-height')?.value) || 0.5;
+  const dpmm    = parseInt(document.getElementById('m-tlbl-dpmm')?.value)     || 12;
+
+  if (!rawZpl) {
+    container.innerHTML = '<span style="font-size:.75rem;color:#9ca3af;font-style:italic">Enter ZPL to see preview</span>';
+    return;
+  }
+
+  const zpl = `^XA${rawZpl}^XZ`;
+
+  // Show spinner only when there is no existing image yet.
+  const existing = container.querySelector('img');
+  if (!existing) container.innerHTML = '<span style="font-size:.75rem;color:#9ca3af;font-style:italic">Rendering…</span>';
+
+  try {
+    const res = await fetch(
+      `https://api.labelary.com/v1/printers/${dpmm}dpmm/labels/${w}x${h}/0/`,
+      { method: 'POST', headers: { 'Accept': 'image/png', 'Content-Type': 'application/x-www-form-urlencoded' }, body: zpl }
+    );
+    if (!res.ok) throw new Error(`Labelary ${res.status}`);
+    const blob = await res.blob();
+    const imgUrl = URL.createObjectURL(blob);
+    // Update in place to avoid flicker if an image is already shown.
+    const img = container.querySelector('img');
+    if (img) {
+      URL.revokeObjectURL(img.src);
+      img.src = imgUrl;
+    } else {
+      container.innerHTML = `<img src="${imgUrl}" alt="Label preview" style="max-width:100%;border-radius:.25rem;box-shadow:0 1px 3px rgba(0,0,0,.12);border:1px solid #e5e7eb;image-rendering:crisp-edges">`;
+    }
+  } catch (e) {
+    container.innerHTML = `<span style="font-size:.75rem;color:#ef4444">${esc(e.message)}</span>`;
+  }
+}
+
+// ── Audit log ─────────────────────────────────────────────────────────────────
+//
+// Every print attempt (success or failure) is recorded in S.auditLog.
+// Entries are prepended so the list is newest-first.
+// The log is capped at 500 entries to prevent unbounded localStorage growth.
+// Each entry stores the full substituted ZPL for every label sent, enabling
+// full traceability (required for GMP / ISO 27001 A.5.28).
+
+/**
+ * Append a new entry to the audit log and persist state.
+ * Called by printLabels() on both the success and catch paths.
+ *
+ * @param {object} params
+ * @param {string}   params.status    - 'success' or 'error'
+ * @param {number}   params.count     - Number of labels in the batch
+ * @param {string}   params.lid       - Printer LID
+ * @param {string}   params.tmplName  - Template display name
+ * @param {string[]} params.zpl       - Array of substituted ZPL strings (one per label, without ^XA/^XZ)
+ * @param {string}   [params.error]   - Error message if status is 'error'
+ */
+function addAuditEntry({ status, count, lid, tmplName, zpl, error }) {
+  const user = getVarValue('user') || '—';
+  const printerName = printerLabel(printers.find(p => p.LID === lid) || { LID: lid, serviceName: lid });
+  S.auditLog.unshift({
+    ts: new Date().toISOString(),
+    user,
+    printer: printerName,
+    printerId: lid,
+    template: tmplName,
+    count,
+    status,
+    error: error || null,
+    zpl: zpl || [],
+  });
+  if (S.auditLog.length > 500) S.auditLog.length = 500;
+  save();
+}
+
+function renderAuditLog() {
+  // Backfill printerId for legacy entries that pre-date this field.
+  // Match by display name against the currently loaded printers list.
+  if (printers.length) {
+    let dirty = false;
+    S.auditLog.forEach(e => {
+      if (!e.printerId) {
+        const match = printers.find(p => printerLabel(p) === e.printer);
+        if (match) { e.printerId = match.LID; dirty = true; }
+      }
+    });
+    if (dirty) save();
+  }
+
+  const el = document.getElementById('audit-list');
+  if (!S.auditLog.length) {
+    el.innerHTML = empty('No print events recorded yet.');
+    return;
+  }
+  el.innerHTML = `
+    <div style="overflow-x:auto">
+      <table style="width:100%;border-collapse:collapse;font-size:0.75rem">
+        <thead>
+          <tr style="background:#f9fafb;border-bottom:1px solid #e5e7eb">
+            <th class="th" style="white-space:nowrap">Timestamp</th>
+            <th class="th">User</th>
+            <th class="th">Printer</th>
+            <th class="th">Printer ID</th>
+            <th class="th">Template</th>
+            <th class="th">#</th>
+            <th class="th">Result</th>
+            <th class="th">ZPL</th>
+          </tr>
+        </thead>
+        <tbody>
+          ${S.auditLog.map((e, i) => {
+            const bg = i % 2 ? 'background:#f9fafb' : '';
+            const statusCell = e.status === 'success'
+              ? `<td class="px-3 py-1.5" style="color:#15803d">✓ OK</td>`
+              : `<td class="px-3 py-1.5" style="color:#b91c1c" title="${esc(e.error||'')}">✗ Error</td>`;
+            const zplText = (e.zpl || []).map((z, n) => `--- Label ${n+1} ---\n^XA${z}^XZ`).join('\n\n');
+            return `<tr style="${bg}">
+              <td class="px-3 py-1.5" style="white-space:nowrap;color:#6b7280">${esc(e.ts.replace('T',' ').slice(0,19))}</td>
+              <td class="px-3 py-1.5">${esc(e.user)}</td>
+              <td class="px-3 py-1.5">${esc(e.printer)}</td>
+              <td class="px-3 py-1.5" style="color:#6b7280;white-space:nowrap;font-family:monospace">${esc(e.printerId || '—')}</td>
+              <td class="px-3 py-1.5">${esc(e.template)}</td>
+              <td class="px-3 py-1.5 text-center">${e.count}</td>
+              ${statusCell}
+              <td class="px-3 py-1.5">
+                ${zplText ? `<button type="button" onclick="toggleAuditZpl(${i})"
+                  style="font-size:0.7rem;padding:0.1rem 0.4rem;border:1px solid #d1d5db;border-radius:0.25rem;cursor:pointer;background:#f9fafb"
+                  >▶ View</button>` : '<span style="color:#d1d5db">—</span>'}
+              </td>
+            </tr>
+            <tr id="audit-zpl-${i}" style="display:none">
+              <td colspan="8" style="padding:0.5rem 0.75rem;background:#f8fafc;border-bottom:1px solid #e5e7eb">
+                <textarea readonly class="zpl-editor"
+                  style="width:100%;height:10rem;border:1px solid #e5e7eb;border-radius:0.25rem;padding:0.5rem;background:white;resize:vertical;display:block"
+                  >${esc(zplText)}</textarea>
+              </td>
+            </tr>`;
+          }).join('')}
+        </tbody>
+      </table>
+    </div>`;
+}
+
+/**
+ * Toggle the ZPL detail row for a given audit entry in/out of view.
+ * The detail row is a full-width <tr> immediately after the data row,
+ * containing a read-only textarea with the full ZPL for all labels in the batch.
+ * @param {number} idx - Index into S.auditLog (also the DOM row suffix).
+ */
+function toggleAuditZpl(idx) {
+  const row = document.getElementById(`audit-zpl-${idx}`);
+  if (!row) return;
+  const visible = row.style.display !== 'none';
+  row.style.display = visible ? 'none' : 'table-row';
+  const btn = row.previousElementSibling?.querySelector('button');
+  if (btn) btn.textContent = visible ? '▶ View' : '▼ Hide';
+}
+
+/**
+ * Export the full audit log as a CSV file.
+ * The ZPL column contains all label ZPL strings for the batch, formatted as
+ * "--- Label N ---\n^XA…^XZ\n\n…" and RFC 4180-quoted.
+ * The filename includes today's date for easy archival.
+ */
+function exportAuditLog() {
+  const header = ['Timestamp','User','Printer','Printer ID','Template','Labels','Status','Error','ZPL'];
+  const rows = S.auditLog.map(e => [
+    e.ts, e.user, e.printer, e.printerId || '', e.template, e.count, e.status, e.error || '',
+    (e.zpl || []).map((z, n) => `--- Label ${n+1} ---\n^XA${z}^XZ`).join('\n\n')
+  ].map(v => `"${String(v).replace(/"/g,'""')}"`).join(','));
+  const csv = [header.join(','), ...rows].join('\r\n');
+  const blob = new Blob([csv], { type: 'text/csv' });
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = `fluics-audit-${new Date().toISOString().slice(0,10)}.csv`;
+  a.click();
+  URL.revokeObjectURL(a.href);
+}
+
+/** Clear the entire audit log after confirmation. This action is irreversible. */
+function clearAuditLog() {
+  if (!confirm('Clear the entire audit log? This cannot be undone.')) return;
+  S.auditLog = [];
+  save();
+  renderAuditLog();
+}
+
+// ── Helpers ────────────────────────────────────────────────────────────────────
+
+/**
+ * HTML-escape a value for safe insertion into innerHTML.
+ * Handles null/undefined by converting to empty string first.
+ * @param {*} s - Value to escape.
+ * @returns {string} HTML-safe string.
+ */
+function esc(s) {
+  return String(s ?? '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+
+/** Return an em-dash placeholder for empty table cells. */
+function dash() { return '<span class="text-gray-300">—</span>'; }
+
+/** Return a styled italic empty-state message paragraph. */
+function empty(msg) { return `<p class="text-sm text-gray-400 italic py-1">${msg}</p>`; }
+
+/**
+ * After any variable change in Configure, prune group data that references
+ * values no longer present in the preset lists.
+ * Only applies when the variable is a dropdown — free-text fields are unrestricted.
+ */
+function syncGroupData() {
+  const var1V = varBy('var1');
+  const testV = varBy('var3');
+  let dirty = false;
+
+  S.groups.forEach(f => {
+    if (var1V.type === 'dropdown') {
+      const before = f.products.length;
+      f.products = f.products.filter(p => (var1V.presets || []).includes(p));
+      if (f.products.length !== before) dirty = true;
+    }
+    if (testV.type === 'dropdown') {
+      const before = f.labelSet.length;
+      f.labelSet = f.labelSet.filter(r => !r.test || (testV.presets || []).includes(r.test));
+      if (f.labelSet.length !== before) dirty = true;
+    }
+  });
+
+  if (dirty) save();
+}
+
+// ── Groups tab ────────────────────────────────────────────────────────────────
+
+/** Render all group cards into the Groups tab. */
+function renderGroups() {
+  const el = document.getElementById('groups-list');
+  if (!el) return;
+  if (!S.groups.length) {
+    el.innerHTML = empty('No groups yet — click + New Group to create one.');
+    return;
+  }
+  el.innerHTML = S.groups.map(f => groupCard(f)).join('');
+}
+
+/** Tracks which group cards are currently collapsed (session-only). */
+const collapsedGroups = new Set();
+
+/** Toggle a group card's collapsed state and re-render. */
+function toggleGroupCollapse(id) {
+  collapsedGroups.has(id) ? collapsedGroups.delete(id) : collapsedGroups.add(id);
+  renderGroups();
+}
+
+/** Build the HTML for one group card. */
+function groupCard(f) {
+  const collapsed   = collapsedGroups.has(f.id);
+  const var1V       = varBy('var1');
+  const testV       = varBy('var3');
+  const summary     = `${f.products.length} product${f.products.length !== 1 ? 's' : ''} · ${f.labelSet.length} test${f.labelSet.length !== 1 ? 's' : ''}`;
+  const var1Presets = var1V.type === 'dropdown' ? (var1V.presets || []) : null;
+  const testPresets = testV.type === 'dropdown' ? (testV.presets || []) : null;
+
+  // ── Product pills ──
+  const pills = f.products.map(p =>
+    `<span class="inline-flex items-center gap-1 px-2 py-0.5 bg-blue-50 border border-blue-200 rounded-full text-xs text-blue-700">
+      ${esc(p)}
+      <button type="button" onclick="removeProductFromGroup('${esc(f.id)}','${esc(p)}')"
+              class="text-blue-400 hover:text-blue-700 leading-none ml-0.5">×</button>
+    </span>`
+  ).join('');
+
+  // ── Product add control ──
+  let productAddControl;
+  if (var1Presets) {
+    const unassigned = var1Presets.filter(p => !f.products.includes(p));
+    if (unassigned.length) {
+      // Dropdown: auto-add on selection, no separate button needed.
+      productAddControl = `
+        <select id="padd-${esc(f.id)}" class="field-input w-full text-sm"
+                onchange="if(this.value) addProductToGroup('${esc(f.id)}')">
+          <option value="">— select ${esc(var1V.label)} to add —</option>
+          ${unassigned.map(p => `<option value="${esc(p)}">${esc(p)}</option>`).join('')}
+        </select>`;
+    } else {
+      productAddControl = `<p class="text-xs text-gray-400 italic">All configured ${esc(var1V.label)} values assigned.</p>`;
+    }
+  } else {
+    // Free-text: keep the original text input + Add button.
+    productAddControl = `
+      <div class="flex gap-2">
+        <input id="padd-${esc(f.id)}" type="text" class="field-input flex-1 text-sm"
+               placeholder="${esc(var1V.label)}…"
+               onkeydown="if(event.key==='Enter'){event.preventDefault();addProductToGroup('${esc(f.id)}');}">
+        <button type="button" onclick="addProductToGroup('${esc(f.id)}')" class="btn-secondary text-xs">+ Add</button>
+      </div>`;
+  }
+
+  // ── Label-set rows ──
+  const rows = f.labelSet.map(row => {
+    const testField = testPresets
+      ? `<select onchange="updateLabelSetRow('${esc(f.id)}','${esc(row.id)}','test',this.value)"
+                class="field-input flex-1 text-sm">
+           <option value="">— select ${esc(testV.label)} —</option>
+           ${testPresets.map(t => `<option value="${esc(t)}" ${row.test === t ? 'selected' : ''}>${esc(t)}</option>`).join('')}
+         </select>`
+      : `<input type="text" value="${esc(row.test)}"
+               oninput="updateLabelSetRow('${esc(f.id)}','${esc(row.id)}','test',this.value)"
+               class="field-input flex-1 text-sm" placeholder="${esc(testV.label)}">`;
+    return `<div class="flex items-center gap-2">
+      ${testField}
+      <input type="number" value="${esc(row.count)}" min="1" max="9999"
+             oninput="updateLabelSetRow('${esc(f.id)}','${esc(row.id)}','count',this.value)"
+             class="field-input w-20 text-sm text-center" placeholder="${esc(label('counter'))}">
+      <button type="button" onclick="removeLabelSetRow('${esc(f.id)}','${esc(row.id)}')"
+              class="text-gray-400 hover:text-red-500 px-1 text-base leading-none" title="Remove row">×</button>
+    </div>`;
+  }).join('');
+
+  // ── Add Row button: disabled when test is dropdown with no presets ──
+  const addRowDisabled = testPresets && testPresets.length === 0;
+  const addRowBtn = addRowDisabled
+    ? `<p class="text-xs text-gray-400 italic">Configure ${esc(testV.label)} values in the Configure tab first.</p>`
+    : `<button type="button" onclick="addLabelSetRow('${esc(f.id)}')" class="btn-secondary text-xs">+ Add Row</button>`;
+
+  const body = collapsed ? '' : `
+    <div class="px-4 pb-4 space-y-4 border-t border-gray-100 pt-4">
+      <div>
+        <label class="field-label">Products assigned to this group</label>
+        <div class="flex flex-wrap gap-1.5 min-h-[1.75rem] mb-2">
+          ${pills || '<span class="text-xs text-gray-400 italic">None assigned yet</span>'}
+        </div>
+        ${productAddControl}
+      </div>
+      <div>
+        <label class="field-label">Label set — one row = one print job per group run</label>
+        <div class="flex gap-2 mb-1.5 px-1">
+          <span class="text-xs text-gray-400 flex-1">${esc(testV.label)}</span>
+          <span class="text-xs text-gray-400 w-20 text-center">${esc(label('counter'))}</span>
+          <span class="w-5"></span>
+        </div>
+        <div class="space-y-2 mb-2">
+          ${rows || '<p class="text-xs text-gray-400 italic">No rows yet</p>'}
+        </div>
+        ${addRowBtn}
+      </div>
+    </div>`;
+
+  return `
+    <div class="border border-gray-200 rounded-lg" id="group-${esc(f.id)}">
+      <div class="flex items-center gap-3 p-3">
+        <button type="button" onclick="toggleGroupCollapse('${esc(f.id)}')"
+                class="text-gray-400 hover:text-gray-600 shrink-0 w-4 text-center text-xs leading-none">
+          ${collapsed ? '▶' : '▼'}
+        </button>
+        <div class="flex-1 min-w-0">
+          <label class="field-label mb-0.5">Group Name</label>
+          <input type="text" value="${esc(f.name)}"
+                 oninput="updateGroupName('${esc(f.id)}',this.value)"
+                 class="field-input w-full text-sm" placeholder="e.g. Antibodies">
+        </div>
+        <span class="text-xs text-gray-400 shrink-0 hidden sm:block">${summary}</span>
+        <button type="button" onclick="deleteGroup('${esc(f.id)}')"
+                class="text-xs text-red-500 hover:underline shrink-0">Delete</button>
+      </div>
+      ${body}
+    </div>`;
+}
+
+/** Add a new empty group. */
+function addGroup() {
+  S.groups.push({ id: uid(), name: '', products: [], labelSet: [] });
+  save(); renderGroups();
+}
+
+/** Delete a group after confirmation. */
+function deleteGroup(id) {
+  if (!confirm('Delete this group?')) return;
+  S.groups = S.groups.filter(f => f.id !== id);
+  save(); renderGroups(); updateGroupToggle();
+}
+
+/** Persist the group name while the user types (auto-save). */
+function updateGroupName(id, value) {
+  const f = S.groups.find(x => x.id === id);
+  if (f) { f.name = value; save(); }
+  updateGroupToggle();
+}
+
+/** Add a product string to a group from the inline input. */
+function addProductToGroup(id) {
+  const inp = document.getElementById(`padd-${id}`);
+  if (!inp) return;
+  const val = inp.value.trim();
+  if (!val) return;
+  const f = S.groups.find(x => x.id === id);
+  if (!f || f.products.includes(val)) { inp.value = ''; return; }
+  f.products.push(val);
+  inp.value = '';
+  save(); renderGroups(); updateGroupToggle();
+}
+
+/** Remove a product pill from a group. */
+function removeProductFromGroup(id, product) {
+  const f = S.groups.find(x => x.id === id);
+  if (!f) return;
+  f.products = f.products.filter(p => p !== product);
+  save(); renderGroups(); updateGroupToggle();
+}
+
+/** Append a new blank label-set row to a group. */
+function addLabelSetRow(id) {
+  const f = S.groups.find(x => x.id === id);
+  if (!f) return;
+  f.labelSet.push({ id: uid(), test: '', count: 1 });
+  save(); renderGroups(); updateGroupToggle();
+}
+
+/** Remove a row from a group's label set. */
+function removeLabelSetRow(id, rowId) {
+  const f = S.groups.find(x => x.id === id);
+  if (!f) return;
+  f.labelSet = f.labelSet.filter(r => r.id !== rowId);
+  save(); renderGroups(); updateGroupToggle();
+}
+
+/** Auto-save a field change in a label-set row. */
+function updateLabelSetRow(id, rowId, field, value) {
+  const f = S.groups.find(x => x.id === id);
+  if (!f) return;
+  const row = f.labelSet.find(r => r.id === rowId);
+  if (!row) return;
+  row[field] = field === 'count' ? (parseInt(value) || 1) : value;
+  save(); updateGroupToggle();
+}
+
+// ── Group toggle (Print tab) ───────────────────────────────────────────────────
+
+/**
+ * Show or update the group toggle row inside the form card.
+ * Called by refreshPreview() on every input change and by group CRUD operations.
+ * When the toggle is on, buildLabels() returns group labels and the shared
+ * preview table / visual preview reflect the full group print automatically.
+ */
+function updateGroupToggle() {
+  const row = document.getElementById('group-toggle-row');
+  if (!row) return;
+  const product = getVarValue('var1');
+  const group   = product ? S.groups.find(f => f.products.includes(product)) : null;
+
+  if (!group || !group.labelSet.length) {
+    // No applicable group — hide toggle and deactivate group mode silently.
+    if (groupModeActive) { groupModeActive = false; S.lastUsed.groupMode = false; save(); syncGroupUI(); }
+    row.classList.add('hidden');
+    row.innerHTML = '';
+    return;
+  }
+
+  const totalLabels = group.labelSet.reduce((s, r) => s + (parseInt(r.count) || 0), 0);
+  row.innerHTML = `
+    <div class="flex items-center justify-between py-0.5">
+      <div class="flex items-center gap-2">
+        <span style="font-size:.65rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;
+                     background:#eff6ff;color:#1d4ed8;border:1px solid #bfdbfe;
+                     padding:.125rem .5rem;border-radius:999px">Group</span>
+        <span class="text-sm text-gray-700">${esc(group.name || 'Unnamed')}</span>
+        <span class="text-xs text-gray-400">${group.labelSet.length} test${group.labelSet.length !== 1 ? 's' : ''} · ${totalLabels} label${totalLabels !== 1 ? 's' : ''}</span>
+      </div>
+      <label class="flex items-center gap-2 cursor-pointer select-none">
+        <span class="text-xs text-gray-500">Group Mode</span>
+        <div class="relative">
+          <input type="checkbox" id="group-mode-checkbox" class="sr-only peer"
+                 ${groupModeActive ? 'checked' : ''}
+                 onchange="onGroupModeToggle(this.checked)">
+          <div class="w-9 h-5 bg-gray-200 rounded-full peer peer-checked:bg-blue-600 transition-colors"></div>
+          <div class="absolute top-0.5 left-0.5 w-4 h-4 bg-white rounded-full shadow transition-transform peer-checked:translate-x-4"></div>
+        </div>
+      </label>
+    </div>`;
+  row.classList.remove('hidden');
+}
+
+/** Called when the toggle changes — flip mode, refresh preview and button label. */
+function onGroupModeToggle(checked) {
+  groupModeActive = checked;
+  S.lastUsed.groupMode = checked;
+  save();
+  syncGroupUI();
+  clearLabelaryCache();
+  refreshPreview();
+}
+
+/** Update UI chrome that reflects group mode state without a full re-render. */
+function syncGroupUI() {
+  const btn = document.getElementById('print-btn');
+  if (btn) btn.textContent = groupModeActive ? 'Print Group' : 'Print Labels';
+  // Dim the counter and var3 inputs when group mode drives those values.
+  ['var-input-counter', 'var-input-var3'].forEach(id => {
+    const el = document.getElementById(id);
+    if (el) { el.disabled = groupModeActive; el.style.opacity = groupModeActive ? '0.4' : ''; }
+  });
+}
+
+// ── Barcode / QR scanner ──────────────────────────────────────────────────────
+//
+// Uses the BarcodeDetector API (Chrome/Android/Safari 17+) to scan codes from
+// the rear camera and fill the target input. Falls back gracefully with an
+// informative message if the API is unavailable.
+
+/** Returns the inline SVG camera icon used in scan buttons. */
+function scannerCameraIcon() {
+  return `<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+      d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"/>
+    <circle cx="12" cy="13" r="3" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+  </svg>`;
+}
+
+let scannerStream       = null;
+let scannerAnimFrame    = null;
+let scannerTargetId     = null;
+let scannerDetector     = null;
+
+/**
+ * Open the scanner overlay and start the camera for the given input element.
+ * @param {string} inputId - ID of the input to fill on successful scan.
+ */
+async function openScanner(inputId) {
+  scannerTargetId = inputId;
+  const overlay = document.getElementById('scanner-overlay');
+  const status  = document.getElementById('scanner-status');
+  const video   = document.getElementById('scanner-video');
+  overlay.classList.remove('hidden');
+
+  if (!('BarcodeDetector' in window)) {
+    status.textContent = 'Barcode scanning is not supported in this browser. Try Chrome on Android or Safari 17+.';
+    return;
+  }
+
+  // Show diagnostic info so we know exactly what the browser reports.
+  const proto = location.protocol;
+  const hasMD = !!(navigator.mediaDevices && navigator.mediaDevices.getUserMedia);
+  status.textContent = `Checking… (${proto} / mediaDevices:${hasMD})`;
+
+  // navigator.mediaDevices is undefined on file:// URLs — camera requires a
+  // secure context (https:// or localhost).
+  if (!hasMD) {
+    status.textContent = `Camera not available [${proto}]. Open this page over HTTPS or localhost to enable scanning.`;
+    return;
+  }
+
+  status.textContent = 'Requesting camera…';
+  try {
+    // Prefer the rear camera; fall back to any video device if the constraint
+    // is rejected (some Android browsers reject environment facingMode).
+    try {
+      scannerStream = await navigator.mediaDevices.getUserMedia({
+        video: { facingMode: { ideal: 'environment' } }
+      });
+    } catch (e1) {
+      status.textContent = `Fallback (${e1.name})…`;
+      scannerStream = await navigator.mediaDevices.getUserMedia({ video: true });
+    }
+    video.srcObject = scannerStream;
+    await video.play();
+    status.textContent = 'Point camera at a barcode or QR code…';
+
+    const supported = await BarcodeDetector.getSupportedFormats();
+    scannerDetector = new BarcodeDetector({ formats: supported });
+    scanLoop();
+  } catch (e) {
+    if (e.name === 'NotAllowedError' || e.name === 'PermissionDeniedError') {
+      status.textContent = 'Camera permission denied. In Chrome: tap the ⓘ icon in the address bar → Permissions → Camera → Allow. Then reload the page and try again.';
+    } else if (e.name === 'NotFoundError') {
+      status.textContent = 'No camera found on this device.';
+    } else {
+      status.textContent = `Camera error [${e.name}]: ${e.message}`;
+    }
+  }
+}
+
+/** Continuously scan video frames for barcodes. Stops on first match. */
+function scanLoop() {
+  if (!scannerStream || !scannerDetector) return;
+  const video = document.getElementById('scanner-video');
+
+  async function detect() {
+    if (!scannerStream) return;
+    try {
+      const results = await scannerDetector.detect(video);
+      if (results.length) {
+        const val = results[0].rawValue;
+        const el  = document.getElementById(scannerTargetId);
+        if (el) { el.value = val; el.dispatchEvent(new Event('input')); }
+        closeScanner();
+        return;
+      }
+    } catch { /* frame not ready yet */ }
+    scannerAnimFrame = requestAnimationFrame(detect);
+  }
+
+  scannerAnimFrame = requestAnimationFrame(detect);
+}
+
+/** Stop the camera stream and hide the scanner overlay. */
+function closeScanner() {
+  if (scannerAnimFrame) { cancelAnimationFrame(scannerAnimFrame); scannerAnimFrame = null; }
+  if (scannerStream)    { scannerStream.getTracks().forEach(t => t.stop()); scannerStream = null; }
+  scannerDetector = null;
+  const video = document.getElementById('scanner-video');
+  if (video) video.srcObject = null;
+  document.getElementById('scanner-overlay').classList.add('hidden');
+  document.getElementById('scanner-status').textContent = '';
+  scannerTargetId = null;
+}
+
+// ── Init ───────────────────────────────────────────────────────────────────────
+
+// Activate the Print tab, render all inputs, apply persisted Labelary setting,
+// and fetch printers if an API key is already configured.
+setTab('print');
+initPrintTab();
+applyLabelarySetting();
+if (S.settings.apiKey) loadPrinters();
+
+// Close modals when clicking the backdrop (outside the modal box).
+document.getElementById('settings-modal').addEventListener('click', e => { if (e.target === e.currentTarget) closeSettings(); });
+document.getElementById('modal').addEventListener('click', e => { if (e.target === e.currentTarget) closeModal(); });
+document.getElementById('scanner-overlay').addEventListener('click', e => { if (e.target === e.currentTarget) closeScanner(); });
+// Allow Enter key to confirm the generic modal (but not inside textareas).
+document.getElementById('modal').addEventListener('keydown', e => { if (e.key === 'Enter' && e.target.tagName !== 'TEXTAREA') modalSave(); });
+</script>
+</body>
+</html>
