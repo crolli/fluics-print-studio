@@ -372,7 +372,14 @@
  */
 const DEFAULTS = {
   settings: { apiKey: '', baseUrl: 'https://print-api.fluics.com/latest', labelaryEnabled: true },
-  templates: [],
+  templates: [
+    {
+      id: 'tpl-default-1',
+      name: 'Template Type 1',
+      zpl: '^XA\n^FO20,20^ADN,18,10^FD${PRODUCTNAME}^FS\n^FO20,50^ADN,14,8^FDBatch: ${BATCHID}^FS\n^FO20,75^ADN,14,8^FDDate: ${DATE}^FS\n^FO20,100^BQN,2,4^FDQA,${PRODUCTNAME}^FS\n^XZ',
+      labelWidth: 1.5, labelHeight: 1, labelDpmm: 12
+    }
+  ],
   auditLog: [],
   lastUsed: { printer: '', template: '', varInputs: {}, groupMode: false },
   printerNames: {},
@@ -1247,7 +1254,11 @@ function renderPrinters() {
   const el = document.getElementById('printers-list');
   if (!el) return;
   if (!printers.length) {
-    el.innerHTML = empty('No printers loaded — use the Refresh button or load from the Print tab.');
+    const hasKey = !!S.settings.apiKey;
+    el.innerHTML = hasKey
+      ? empty('No printers found — use the Refresh button to try again.')
+      : `<p class="text-sm text-gray-500">An API key is required to connect a printer. Open <strong>Settings</strong> (gear icon) and enter your key, then click Refresh.</p>
+         <p class="text-sm text-gray-500 mt-2">Don't have an API key yet? Request one at <a href="https://connect.fluics.com" target="_blank" class="text-blue-600 underline hover:text-blue-800">connect.fluics.com</a>.</p>`;
     return;
   }
   el.innerHTML = printers.map(p => {
