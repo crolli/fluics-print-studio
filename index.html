@@ -488,14 +488,14 @@ function loadState() {
     // Migrate label dimensions: renamed from lbl* → label*, and moved from
     // S.settings (very old saves) to per-template fields.
     (s.templates || []).forEach(t => {
-      if (!t.labelWidth)  t.labelWidth  = t.labelWidth  ?? s.settings?.labelWidth  ?? 1;
-      if (!t.labelHeight) t.labelHeight = t.labelHeight ?? s.settings?.labelHeight ?? 0.5;
-      if (!t.labelDpmm)   t.labelDpmm   = t.labelDpmm   ?? s.settings?.labelDpmm   ?? 12;
-      delete t.labelWidth; delete t.labelHeight; delete t.labelDpmm;
+      if (!t.labelWidth)  t.labelWidth  = t.lblWidth  ?? s.settings?.lblWidth  ?? 1;
+      if (!t.labelHeight) t.labelHeight = t.lblHeight ?? s.settings?.lblHeight ?? 0.5;
+      if (!t.labelDpmm)   t.labelDpmm   = t.lblDpmm   ?? s.settings?.lblDpmm   ?? 12;
+      delete t.lblWidth; delete t.lblHeight; delete t.lblDpmm;
     });
-    delete s.settings?.labelWidth;
-    delete s.settings?.labelHeight;
-    delete s.settings?.labelDpmm;
+    delete s.settings?.lblWidth;
+    delete s.settings?.lblHeight;
+    delete s.settings?.lblDpmm;
 
     // Migrate very old lastUsed shape that used var1Id / batchId keys.
     if (!s.lastUsed.varInputs) {
