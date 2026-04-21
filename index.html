@@ -1258,7 +1258,7 @@ function renderPrinters() {
     el.innerHTML = hasKey
       ? empty('No printers found — use the Refresh button to try again.')
       : `<p class="text-sm text-gray-500">An API key is required to connect a printer. Open <strong>Settings</strong> (gear icon) and enter your key, then click Refresh.</p>
-         <p class="text-sm text-gray-500 mt-2">Don't have an API key yet? Request one at <a href="https://connect.fluics.com" target="_blank" class="text-blue-600 underline hover:text-blue-800">connect.fluics.com</a>.</p>`;
+         <p class="text-sm text-gray-500 mt-2">Don't have an API key yet? Request one at <a href="mailto:connect@fluics.com" class="text-blue-600 underline hover:text-blue-800">connect@fluics.com</a>.</p>`;
     return;
   }
   el.innerHTML = printers.map(p => {
