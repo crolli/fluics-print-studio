@@ -1016,10 +1016,14 @@ async function printLabels() {
   });
   save();
 
+  // Build payload and audit name before the try so both are accessible in catch.
+  // Note: the FLUICS API does NOT want ^XA/^XZ wrappers — it adds them itself.
+  const payload   = labels.map(l => ({ id: uid(), data: subst(tmpl.zpl, l) }));
+  const auditName = groupModeActive
+    ? `${tmpl.name} [Group: ${S.groups.find(f => f.products.includes(getVarValue('var1')))?.name || ''}]`
+    : tmpl.name;
+
   try {
-    // Build the payload: substitute variables into the ZPL template for each label.
-    // Note: the FLUICS API does NOT want ^XA/^XZ wrappers — it adds them itself.
-    const payload = labels.map(l => ({ id: uid(), data: subst(tmpl.zpl, l) }));
     for (let i = 0; i < payload.length; i += 100) {
       await apiFetch(`/${lid}/batchprint`, {
         method: 'POST',
@@ -1027,9 +1031,6 @@ async function printLabels() {
         body: JSON.stringify(payload.slice(i, i + 100))
       });
     }
-    const auditName = groupModeActive
-      ? `${tmpl.name} [Group: ${S.groups.find(f => f.products.includes(getVarValue('var1')))?.name || ''}]`
-      : tmpl.name;
     setStatus(`✓ ${labels.length} label${labels.length !== 1 ? 's' : ''} sent successfully`, 'success');
     addAuditEntry({ status: 'success', count: labels.length, lid, tmplName: auditName, zpl: payload.map(p => p.data) });
   } catch (e) {
